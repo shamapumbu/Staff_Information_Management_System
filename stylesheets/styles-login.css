@@ -101,8 +101,9 @@ body {
     border-radius: 0.3rem;
 }
 .login-text-col {
-    margin: 0;
+    margin: auto;
     padding: 65px;
+    width:100%
 }
 .header {
     margin-bottom: 50px;
@@ -181,6 +182,9 @@ body {
     }
     .btn-block {
         width: 100%;
+    }
+    .login-text-col {
+	text-align: center;
     }
     .login-btn {
         margin-bottom: 20px;
