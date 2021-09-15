@@ -1,0 +1,66 @@
+
+CREATE TABLE users ( 
+    id INT NOT NULL AUTO_INCREMENT, 
+    username VARCHAR(50) NOT NULL UNIQUE, 
+    password VARCHAR(255) NOT NULL, 
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+    PRIMARY KEY (id)
+    );
+
+CREATE TABLE employee ( 
+    id INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL, 
+    last_name VARCHAR(50) NOT NULL, 
+    dob DATETIME NOT NULL, 
+    phone VARCHAR(50) NOT NULL, 
+    address VARCHAR(50) NOT NULL, 
+    email VARCHAR(50) NOT NULL, 
+    join_date DATETIME NOT NULL, 
+    gender CHAR(1) NOT NULL, 
+    FOREIGN KEY (id) REFERENCES users(id)
+    );
+
+CREATE TABLE department ( 
+    dept_id INT NOT NULL AUTO_INCREMENT, 
+    dept_name VARCHAR(50) NOT NULL, 
+    PRIMARY KEY (dept_id)
+    );
+
+CREATE TABLE branch ( 
+    branch_id INT NOT NULL AUTO_INCREMENT, 
+    street_address VARCHAR(50) NOT NULL, 
+    postal_code INT NOT NULL, 
+    city VARCHAR(50) NOT NULL, 
+    PRIMARY KEY (branch_id) 
+    );
+
+CREATE TABLE job (
+	job_id INT NOT NULL AUTO_INCREMENT,
+    job_description VARCHAR(50) NOT NULL,
+    salary INT NOT NULL,
+    bonus INT NOT NULL,
+    PRIMARY KEY (job_id)
+);
+
+CREATE TABLE project (
+	project_no INT NOT NULL AUTO_INCREMENT,
+    project_name VARCHAR(50) NOT NULL,
+    project_budget INT NOT NULL,
+    date_commisioned DATETIME NOT NULL,
+    date_completed DATETIME NOT NULL,
+    dept_id INT NOT NULL,
+    PRIMARY KEY (project_no),
+    FOREIGN KEY (dept_id) REFERENCES department(dept_id)
+);
+
+ALTER TABLE employee ADD job_id INT NOT NULL;
+ALTER TABLE employee ADD FOREIGN KEY (job_id) REFERENCES job(job_id);
+
+ALTER TABLE employee ADD branch_id INT NOT NULL;
+ALTER TABLE employee ADD FOREIGN KEY (branch_id) REFERENCES branch(branch_id);
+
+ALTER TABLE employee ADD dept_id INT NOT NULL;
+ALTER TABLE employee ADD FOREIGN KEY (dept_id) REFERENCES department(dept_id);
+
+ALTER TABLE employee ADD project_no INT NOT NULL;
+ALTER TABLE employee ADD FOREIGN KEY (project_no) REFERENCES project(project_no);
