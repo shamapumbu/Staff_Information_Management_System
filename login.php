@@ -12,37 +12,37 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = "";
-$username_err = $password_err = $login_err = "";
+$id = $password = "";
+$emp_id_error = $password_error = $login_error = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Check if username is empty
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
+    if(empty(trim($_POST["id"]))){
+        $emp_id_error = "Please enter your employee number";
     } else{
-        $username = trim($_POST["username"]);
+        $id = trim($_POST["id"]);
     }
     
     // Check if password is empty
     if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
+        $password_error = "Please enter your password.";
     } else{
         $password = trim($_POST["password"]);
     }
     
     // Validate credentials
-    if(empty($username_err) && empty($password_err)){
+    if(empty($emp_id_error) && empty($password_error)){
         // Prepare a select statement
-        $sql = "SELECT id, username, password FROM users WHERE username = ?";
+        $sql = "SELECT id, username, password FROM users WHERE id = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            mysqli_stmt_bind_param($stmt, "s", $param_id);
             
             // Set parameters
-            $param_username = $username;
+            $param_id = $id;
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -67,12 +67,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             header("location: welcome.php");
                         } else{
                             // Password is not valid, display a generic error message
-                            $login_err = "Invalid username or password.";
+                            $login_error = "Invalid employee number or password.";
                         }
                     }
                 } else{
                     // Username doesn't exist, display a generic error message
-                    $login_err = "Invalid username or password.";
+                    $login_error = "Invalid employee number or password.";
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -146,19 +146,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     </div>
 
                     <?php 
-                        if(!empty($login_err)){
-                            echo '<div class="alert alert-danger">' . $login_err . '</div>';
+                        if(!empty($login_error)){
+                            echo '<div class="alert alert-danger">' . $login_error . '</div>';
                         }        
                     ?>
 
                     <form class="login-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group input-group input-group-lg text-box">
-                            <input type="text" class="form-control login-input <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" placeholder="Employee Number" name="username" value="<?php echo $username; ?>">
-                            <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                            <input type="text" class="form-control login-input <?php echo (!empty($emp_id_error)) ? 'is-invalid' : ''; ?>" placeholder="Employee Number" name="id" value="<?php echo $id; ?>">
+                            <span class="invalid-feedback"><?php echo $emp_id_error; ?></span>
                           </div>
                         <div class="form-group input-group input-group-lg text-box">
-                            <input type="password" class="form-control login-input <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" placeholder="Password" name="password">
-                            <span class="invalid-feedback"><?php echo $password_err; ?></span>
+                            <input type="password" class="form-control login-input <?php echo (!empty($password_error)) ? 'is-invalid' : ''; ?>" placeholder="Password" name="password">
+                            <span class="invalid-feedback"><?php echo $password_error; ?></span>
                           </div>
                         
                         <div class="row submit-links">
