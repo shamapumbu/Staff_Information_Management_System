@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2021 at 11:10 AM
+-- Generation Time: Sep 16, 2021 at 11:17 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -116,7 +116,8 @@ INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
 (3, 'kali', '$2y$10$mn7379BJHfLkgDITfzVftucccC/noJfzgb2xYt2YH5GZiBkpw3IfG', '2021-09-15 14:40:59'),
 (4, 'thotholani', '$2y$10$avUellSqO1T9bt7RnjrKjem/Q3QIciVCd0pMsYtXcNAqC316HCL.q', '2021-09-15 15:15:58'),
 (5, 'abigail', '$2y$10$K.DVgB9dMelzXttXt.R4eu40Mp4UqNSjCj9kghE8MiRuNFh.lR.Y2', '2021-09-16 09:05:15'),
-(6, 'william', '$2y$10$h8RN9da.eWKpnHiLQxMMiumYzHhgwUay4jR5gORtPVpZL2lRNb7cO', '2021-09-16 09:06:05');
+(6, 'william', '$2y$10$h8RN9da.eWKpnHiLQxMMiumYzHhgwUay4jR5gORtPVpZL2lRNb7cO', '2021-09-16 09:06:05'),
+(1001, 'Sham', '$2y$10$IHlYMiZSBxkHvtFm9Khs6eqsggnI4s22lMrYjHVmgc3hrPXNtY4vO', '2021-09-16 11:16:36');
 
 --
 -- Indexes for dumped tables
@@ -196,7 +197,7 @@ ALTER TABLE `project`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1002;
 
 --
 -- Constraints for dumped tables
