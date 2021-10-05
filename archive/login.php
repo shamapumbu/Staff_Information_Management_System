@@ -1,3 +1,33 @@
+<?php
+   include("config.php");
+   session_start();
+   
+   if($_SERVER["REQUEST_METHOD"] == "POST") {
+      // emp_id and password sent from form 
+      
+      $myEmp_id = mysqli_real_escape_string($db,$_POST['emp_id']);
+      $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
+      
+      $sql = "SELECT emp_id FROM employee WHERE emp_id = '$myEmp_id' and password = '$mypassword'";
+      $result = mysqli_query($db,$sql);
+      $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+      $active = $row['active'];
+      
+      $count = mysqli_num_rows($result);
+      
+      // If result matched $myEmp_id and $mypassword, table row must be 1 row
+		
+      if($count == 1) {
+        //session_register("myEmp_id$myEmp_id");
+        $_SESSION['login_user'] = $myEmp_id;
+         
+         header("location: welcome.php");
+      }else {
+         $error = "Your Login Name or Password is invalid";
+      }
+   }
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -26,15 +56,15 @@
 
 <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="index.html"><i class="fas fa-grip-lines-vertical icon"></i><i class="fas fa-grip-lines-vertical icon"></i> Stairs</a>
-    <button class="navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="index.html"><i class="fa fa-cube"></i> Workspace</a>
+    <!-- <button class="navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="login.html"><i class="fas fa-user icon"></i> Login</a>
-        </li>
+        </li> -->
       </ul>
     </div>
   </nav>
@@ -54,21 +84,30 @@
                         <h2 class="main-heading">Welcome Back</h2>
                         <h5 class="sub-heading">Sign into your account and pick up where you left off</h5>
                     </div>
-                    <form class="login-form">
-                        <div class="input-group input-group-lg text-box">
-                            <input type="text" class="form-control login-input" placeholder="ID Number">
-                        </div>
-                        <div class="input-group input-group-lg text-box">
-                            <input type="password" class="form-control login-input" placeholder="Password">
-                        </div>
+
+                    <?php 
+                        if(!empty($login_error)){
+                            echo '<div class="alert alert-danger">' . $login_error . '</div>';
+                        }        
+                    ?>
+
+                    <form class="login-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <div class="form-group input-group input-group-lg text-box">
+                            <input type="text" class="form-control login-input <?php echo (!empty($emp_id_error)) ? 'is-invalid' : ''; ?>" placeholder="Employee Number" name="emp_id" value="<?php echo $id; ?>">
+                            <span class="invalid-feedback"><?php echo $emp_id_error; ?></span>
+                          </div>
+                        <div class="form-group input-group input-group-lg text-box">
+                            <input type="password" class="form-control login-input <?php echo (!empty($password_error)) ? 'is-invalid' : ''; ?>" placeholder="Password" name="password">
+                            <span class="invalid-feedback"><?php echo $password_error; ?></span>
+                          </div>
                         
                         <div class="row submit-links">
                             <div class="col-md-7 login-btn">
                                 <button type="submit" class="btn btn-primary btn-block">Login</button>
                             </div>
-                            <div class="col-md-5 forgot-pass">
+                            <!-- <div class="col-md-5 forgot-pass">
                                 <a href="" class="login-link">Forgot Password?</a>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                   </div>

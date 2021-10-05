@@ -155,16 +155,18 @@ body {
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
 		<div class="navbar-nav">
 			<a href="#" class="nav-item nav-link">Dashboard</a>
-      		<a href="#" class="nav-item nav-link">Projects</a>
-      		<a href="#" class="nav-item nav-link">My Profile</a>
-			<a href="#" class="nav-item nav-link">Holidays</a>
+			<a href="#" class="nav-item nav-link">Employees</a>
+			<a href="#" class="nav-item nav-link">Departments</a>
+      <a href="#" class="nav-item nav-link">Projects</a>
+      <a href="#" class="nav-item nav-link">Branches</a>
+      <a href="#" class="nav-item nav-link">Holidays</a>
 		</div>
-		<!-- <form class="navbar-form form-inline">
+		<form class="navbar-form form-inline">
 			<div class="input-group search-box">								
 				<input type="text" id="search" class="form-control" placeholder="Search by Name">
 				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
 			</div>
-		</form> -->
+		</form>
 		<div class="navbar-nav ml-auto">
 			<div class="nav-item dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">Paula Wilson <b class="caret"></b></a>
