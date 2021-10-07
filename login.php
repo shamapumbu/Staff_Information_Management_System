@@ -17,6 +17,8 @@
         session_regenerate_id();
         $_SESSION['emp_id'] = $row['emp_id'];
         $_SESSION['job_id'] = $row['job_id'];
+        $_SESSION['first_name'] = $row['first_name'];
+        $_SESSION['last_name'] = $row['last_name'];
         session_write_close();
 
         if($result->num_rows==1 && $_SESSION['job_id'] != "ADMIN") {

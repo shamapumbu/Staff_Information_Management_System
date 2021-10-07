@@ -152,7 +152,7 @@ body {
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
-	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="padding-right: 75px;">
 		<div class="navbar-nav">
 			<a href="#" class="nav-item nav-link">Dashboard</a>
 			<a href="#" class="nav-item nav-link">Employees</a>
@@ -169,7 +169,7 @@ body {
 		</form>
 		<div class="navbar-nav ml-auto">
 			<div class="nav-item dropdown">
-				<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action">Paula Wilson <b class="caret"></b></a>
+				<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><?= $_SESSION['first_name']?> <b class="caret"></b></a>
 				<div class="dropdown-menu">
 					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></a>
 					<a href="#" class="dropdown-item"><i class="fa fa-sliders"></i> Reset Pass</a></a>

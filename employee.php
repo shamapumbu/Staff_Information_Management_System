@@ -5,5 +5,5 @@
     }
 ?>
 
-<h1>Hello: <?= $_SESSION['emp_id'] ?></h1>
-<h2>You are a: <?= $_SESSION['job_id'] ?></h2>
+<h1>Hello <?= $_SESSION['first_name']?></h1>
+<h2>You are a <?= $_SESSION['job_id'] ?></h2>
