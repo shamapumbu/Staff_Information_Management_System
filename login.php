@@ -1,7 +1,8 @@
 <?php
     session_start();
 
-    $conn = new mysqli("localhost", "root", "", "sms");
+    include('config/db_connection.php');
+    
     $msg = "";
     if(isset($_POST['login'])){
         $emp_id = $_POST['emp_id'];
@@ -22,7 +23,7 @@
         session_write_close();
 
         if($result->num_rows==1 && $_SESSION['job_id'] != "ADMIN") {
-            header("location:employee.php");
+            header("location:worker.php");
         } else if($result->num_rows==1 && $_SESSION['job_id'] == "ADMIN") {
             header("location:admin.php");
         } else{
@@ -30,7 +31,6 @@
         }
     }
 ?>
-
 
 <!doctype html>
 <html lang="en">
@@ -56,6 +56,24 @@
 
     <title>Sign In</title>
   </head>
+
+  <style>
+    .bounding {
+      background-color: #1f4c85;
+      padding: 10px;
+      border-radius: 0px 5px 5px 0px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      height: 100%;
+      color: white;
+    }
+    .bounding:hover {
+      text-decoration: none;
+      color: white;
+    }
+  </style>
+
   <body>
 
 <!-- Navigation Bar -->
@@ -95,9 +113,27 @@
                         <div class="form-group input-group input-group-lg text-box">
                             <input type="text" class="form-control login-input" placeholder="Employee Number" name="emp_id" required>
                           </div>
-                        <div class="form-group input-group input-group-lg text-box">
-                            <input type="password" class="form-control login-input" placeholder="Password" name="password" required>
-                          </div>
+
+                            <div class="input-group form-group input-group input-group-lg text-box" id="show_hide_password">
+                              <input class="form-control login-input" type="password" placeholder="Password" name="password" required>
+                              <div class="input-group-addon">
+                                <a href="" class="bounding"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                              </div>
+                            </div>
+                          
+                          <!-- <div class="form-group input-group input-group-lg text-box">
+                            <input type="password" class="form-control login-input" >
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputGroup-sizing-lg"><input type="checkbox" onclick="myFunction()"> Show Password</span>
+                            </div>
+                          </div>  -->
+
+
+                        <!-- <div class="form-group input-group input-group-lg text-box">
+                            <input type="password" id="myPassword" class="form-control login-input" placeholder="Password" name="password" required>
+                            <br>
+                            <input type="checkbox" onclick="myFunction()">Show Password
+                          </div> -->
                         
                         <div class="row submit-links">
                             <div class="col-md-7 login-btn">
@@ -133,5 +169,23 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+      $(document).ready(function() {
+          $("#show_hide_password a").on('click', function(event) {
+              event.preventDefault();
+              if($('#show_hide_password input').attr("type") == "text"){
+                  $('#show_hide_password input').attr('type', 'password');
+                  $('#show_hide_password i').addClass( "fa-eye-slash" );
+                  $('#show_hide_password i').removeClass( "fa-eye" );
+              }else if($('#show_hide_password input').attr("type") == "password"){
+                  $('#show_hide_password input').attr('type', 'text');
+                  $('#show_hide_password i').removeClass( "fa-eye-slash" );
+                  $('#show_hide_password i').addClass( "fa-eye" );
+              }
+          });
+      });
+    </script>
+  
   </body>
 </html>

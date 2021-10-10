@@ -3,18 +3,21 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Dashboard</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merienda+One">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<html lang="en">
+	<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merienda+One">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/173e7e290b.js" crossorigin="anonymous"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
 body {
 	background: #eeeeee;
@@ -44,7 +47,6 @@ body {
 	color: #555;
 	padding-left: 0;
 	padding-right: 50px;
-	font-family: 'Merienda One', sans-serif;
 }
 .navbar .navbar-brand i {
 	font-size: 20px;
@@ -147,12 +149,12 @@ body {
 </head> 
 <body>
 <nav class="navbar navbar-expand-xl navbar-light bg-light">
-	<a href="#" class="navbar-brand"><i class="fa fa-cube"></i>Brand<b>Name</b></a>
+	<a href="#" class="navbar-brand"><i class="fa fa-cube"></i><b>Workspace</b></a>
 	<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<!-- Collection of nav links, forms, and other content for toggling -->
-	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="padding-right:75px;">
+	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="padding-right: 75px;">
 		<div class="navbar-nav">
 			<a href="#" class="nav-item nav-link">Dashboard</a>
       		<a href="#" class="nav-item nav-link">Projects</a>
