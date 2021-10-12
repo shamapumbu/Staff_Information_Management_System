@@ -5,30 +5,51 @@
     
     $msg = "";
     if(isset($_POST['login'])){
-        $emp_id = $_POST['emp_id'];
-        $password = $_POST['password'];
+      $emp_id = $_POST['emp_id'];
+      $password = $_POST['password'];
 
-        $sql = "SELECT * FROM employee WHERE emp_id=? AND password=?";
-        $stmt=$conn->prepare($sql);
-        $stmt->bind_param("ss",$emp_id,$password);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
+      $sql = "SELECT * FROM employee WHERE emp_id='$emp_id'";
 
-        session_regenerate_id();
-        $_SESSION['emp_id'] = $row['emp_id'];
-        $_SESSION['job_id'] = $row['job_id'];
-        $_SESSION['first_name'] = $row['first_name'];
-        $_SESSION['last_name'] = $row['last_name'];
-        session_write_close();
+      $result = mysqli_query($conn,$sql);
 
-        if($result->num_rows==1 && $_SESSION['job_id'] != "ADMIN") {
+      $employee_details = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+      //checks if inputted id is valid
+      if (count($employee_details) > 0) {
+
+        //checks if inputted password is valid
+        if ($employee_details['0']['password'] == $password) {
+          // echo 'correct pass and id';
+
+          //assign session variables
+          session_regenerate_id();
+          $_SESSION['emp_id'] = $employee_details['0']['emp_id'];
+          $_SESSION['job_id'] = $employee_details['0']['job_id'];
+          $_SESSION['password'] = $employee_details['0']['password'];
+          $_SESSION['first_name'] = $employee_details['0']['first_name'];
+          $_SESSION['last_name'] = $employee_details['0']['last_name'];
+          session_write_close();
+
+          //checks type of user
+          if($result->num_rows==1 && $_SESSION['job_id'] != "ADMIN") {
             header("location:worker.php");
-        } else if($result->num_rows==1 && $_SESSION['job_id'] == "ADMIN") {
+          } else if($result->num_rows==1 && $_SESSION['job_id'] == "ADMIN") {
             header("location:admin.php");
-        } else{
-            $msg = "Employee ID or Password is Incorrect";
+          } else{
+            $msg = '<div class="alert alert-danger" role="alert" style="text-align: center">Employee ID or Password is Incorrect</div>';
+          }
+          //end of type of user check
+
+        } else {
+          $msg = '<div class="alert alert-danger" role="alert" style="text-align: center">Employee ID or Password is Incorrect</div>';
         }
+        //end of password check
+
+      } else {
+        //print login error as no user with those details exists
+        $msg = '<div class="alert alert-danger" role="alert" style="text-align: center">Employee ID or Password is Incorrect</div>';
+      }
+      //end of id check
     }
 ?>
 
@@ -105,7 +126,7 @@
                     <div class="header">
                         <h2 class="main-heading">Welcome Back</h2>
                         <h5 class="sub-heading">Sign into your account and pick up where you left off</h5>
-                        <h5 class="text-danger text-center"><?= $msg;  ?></h5>
+                        <h5 class=""><?= $msg;  ?></h5>
                     </div>
 
                     <!-- *** -->
