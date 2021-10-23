@@ -1,12 +1,12 @@
 Project is a work in progress and subject to change
 ===================================================
-
+-IMPORT LATEST VERSION OF DATABASE TO YOUR XAMPP TO USE NEW SYSTEMS
 
 NOTE!
 -To be able to view the project you must have some sort of local server running on your device such as xampp
 (once installed run MYSQL and Apache)
 
--import the file 'demo.sql' to have the database and accompanying tables set up
+-import the file 'sms.sql' to have the database and accompanying tables set up
 
 login details:
 ==============
