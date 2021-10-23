@@ -1,12 +1,27 @@
 <?php 
     include('components/admin_nav.php');
 
+    require_once('config/db_connection.php');
+
     if(!isset($_SESSION['emp_id']) || $_SESSION['job_id']!="ADMIN") {
         header("location:login.php");
     }
 
-    $messages = array('warning'=>'');
+    $sql = 'SELECT * FROM leave_tb ORDER BY leave_id';
+
+    $result = mysqli_query($conn,$sql);
+
+    $leave_count = 0;
+
+    while ($row = mysqli_fetch_assoc($result)) {
+      if ($row['status'] == 'Pending') { 
+        $leave_count++;
+      }
+    }
+
+    $messages = array('warning'=>'','notification'=>'');
     $messages['warning'] = '<div class="alert alert-warning" role="alert" style="text-align: center">Please note that your password is set to the default password. Click <a href="reset-password.php" >here</a> to change it </div>';
+    $messages['notification'] = '<div class="alert alert-info" role="alert" style="text-align: center">You have pending leave applications. Click <a href="leave_app.php" >here</a> to view them </div>';
 ?>
 
 <style>
@@ -24,6 +39,10 @@
     <div class="warning">
       <?php if ($_SESSION['password'] == 'password') { 
         echo $messages['warning'];
+      }  
+      ?>
+      <?php if ($leave_count > 0) { 
+        echo $messages['notification'];
       }  
       ?>
     </div>

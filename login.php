@@ -35,7 +35,7 @@
             header("location:worker.php");
           } else if($result->num_rows==1 && $_SESSION['job_id'] == "ADMIN") {
             header("location:admin.php");
-          } else{
+          } else {
             $msg = '<div class="alert alert-danger" role="alert" style="text-align: center">Employee ID or Password is Incorrect</div>';
           }
           //end of type of user check
