@@ -158,7 +158,7 @@ body {
 		<div class="navbar-nav">
 			<a href="admin.php" class="nav-item nav-link">Dashboard</a>
 			<a href="employee.php" class="nav-item nav-link">Employees</a>
-			<a href="#" class="nav-item nav-link">Departments</a>
+			<a href="dept.php" class="nav-item nav-link">Departments</a>
       <a href="#" class="nav-item nav-link">Projects</a>
       <a href="#" class="nav-item nav-link">Branches</a>
       <a href="leave_app.php" class="nav-item nav-link">Holidays</a>
