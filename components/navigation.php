@@ -156,7 +156,7 @@ body {
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="padding-right: 75px;">
 		<div class="navbar-nav">
-			<a href="employee_dash.php" class="nav-item nav-link">Dashboard</a>
+			<a href="/../sms/employee_dash.php" class="nav-item nav-link">Dashboard</a>
       		<a href="#" class="nav-item nav-link">Projects</a>
       		<a href="#" class="nav-item nav-link">My Profile</a>
 			<div class="nav-item dropdown">

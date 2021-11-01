@@ -34,7 +34,6 @@
                 $sql = "UPDATE employee SET password ='$new' WHERE emp_id ='$id'";
                 mysqli_query($conn, $sql);
                 $messages['notification'] = '<div class="alert alert-success" role="alert" style="text-align: center">Your Password has been sucessfully changed!</div>'; 
-                sleep(5);
                 header('location:logout.php');
             } else {
                 $messages['notification'] = '<div class="alert alert-danger" role="alert" style="text-align: center">Failed to change password! You did not correctly confirm your password</div>';
@@ -63,7 +62,9 @@
         <h2>Reset Password</h2>
         <p>Please fill out this form to reset your password.</p>
         <?php echo $messages['notification']?>
-
+        <div class="alert alert-notification" role="alert" style="text-align: left">
+            <b>NOTE THAT YOU WILL AUTOMATICALLY BE LOGGED OUT UPON CHANGING YOUR PASSWORD</b>
+        </div>;
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <!-- <div class="form-group">
                 <label>Confirm ID</label> -->

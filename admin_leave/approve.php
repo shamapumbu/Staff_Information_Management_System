@@ -1,6 +1,6 @@
 <?php
-    include('config/db_connection.php');
-    echo 'approve code is running';
+    include('../config/db_connection.php');
+    echo '../approve code is running';
 
     $emp_id = $_GET['emp_id'];
     $leave_id = $_GET['leave_id'];

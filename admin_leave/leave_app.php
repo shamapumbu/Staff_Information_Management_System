@@ -195,8 +195,8 @@ $(document).ready(function(){
                 <?php
                     if(mysqli_num_rows($result) > 0){
                 ?>
-                    <div class="col-sm-2"><h2>Manage <b>Leave Applications</b></h2></div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3"><h2>Manage <b>Leave Applications</b></h2></div>
+                    <div class="col-sm-3">
                         <form class="navbar-form form-inline">
                             <div class="input-group search-box">								
                                 <input type="text" id="search" class="form-control" placeholder="Search By Employee ID">
