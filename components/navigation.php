@@ -156,10 +156,16 @@ body {
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="padding-right: 75px;">
 		<div class="navbar-nav">
-			<a href="worker.php" class="nav-item nav-link">Dashboard</a>
+			<a href="employee_dash.php" class="nav-item nav-link">Dashboard</a>
       		<a href="#" class="nav-item nav-link">Projects</a>
       		<a href="#" class="nav-item nav-link">My Profile</a>
-			<a href="leave.php" class="nav-item nav-link">Holidays</a>
+			<div class="nav-item dropdown">
+			<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Leave</a>
+				<div class="dropdown-menu">
+					<a href="/../sms/emp_leave/leave.php" class="dropdown-item">Apply for Leave</a>
+					<a href="/../sms/emp_leave/leave_his.php" class="dropdown-item">My Leave History</a>
+				</div>
+			</div>
 		</div>
 		<!-- <form class="navbar-form form-inline">
 			<div class="input-group search-box">								
@@ -172,9 +178,9 @@ body {
 				<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><?= $_SESSION['first_name']?><b class="caret"></b></a>
 				<div class="dropdown-menu">
 					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></a>
-					<a href="../sms/reset-password.php" class="dropdown-item"><i class="fa fa-sliders"></i> Reset Password</a></a>
+					<a href="/../sms/reset-password.php" class="dropdown-item"><i class="fa fa-sliders"></i> Reset Password</a></a>
 					<div class="dropdown-divider"></div>
-					<a href="../sms/logout.php" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></a>
+					<a href="/../sms/logout.php" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></a>
 				</div>
 			</div>
 		</div>

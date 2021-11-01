@@ -1,7 +1,7 @@
 <?php
-    include('config/db_connection.php');
+    include('../config/db_connection.php');
 
-    include('components/admin_nav.php');
+    include('../components/admin_nav.php');
 
     $sql = 'SELECT * FROM leave_tb ORDER BY leave_id';
     // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
@@ -186,12 +186,24 @@ $(document).ready(function(){
 <body>
 
 <div class="container-xl">
+    
     <!-- Table -->
     <div class="table-responsive">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-6"><h2>Manage <b>Leave Applications</b></h2></div>
+                <?php
+                    if(mysqli_num_rows($result) > 0){
+                ?>
+                    <div class="col-sm-2"><h2>Manage <b>Leave Applications</b></h2></div>
+                    <div class="col-sm-2">
+                        <form class="navbar-form form-inline">
+                            <div class="input-group search-box">								
+                                <input type="text" id="search" class="form-control" placeholder="Search By Employee ID">
+                                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                            </div>
+                        </form>
+                    </div>
                     <div class="col-sm-6">
                         <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-info active">
@@ -257,12 +269,14 @@ $(document).ready(function(){
                                 echo "</tr>";
                             }
                             ?>
-                            </tr>
-                            
+                            </tr> 
                 </tbody>
             </table>
         </div> 
     </div>
+    <?php } else { 
+        echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+    } ?>
     <!-- Table --> 
 </div>
 </body>

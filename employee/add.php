@@ -1,6 +1,6 @@
 <?php
 
-    include('config/db_connection.php');
+    include('../config/db_connection.php');
 
     $errors = array('pop_up'=>'','fname_error'=>'','lname_error'=>'','phone_error'=>'','email_error'=>'','address_error'=>'');
 
