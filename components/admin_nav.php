@@ -32,6 +32,9 @@ body {
 	background: #fff;
 	padding-left: 16px;
 	padding-right: 16px;
+	position: sticky;
+	top: 0%;
+	z-index: 8;
 	border-bottom: 1px solid #d6d6d6;
 	box-shadow: 0 0 4px rgba(0,0,0,.1);
 }
@@ -168,7 +171,7 @@ body {
 			<div class="nav-item dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><?= $_SESSION['first_name']?> <b class="caret"></b></a>
 				<div class="dropdown-menu">
-					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></a>
+					<a href="/../sms/profile.php" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></a>
 					<a href="/../sms/reset-password.php" class="dropdown-item"><i class="fa fa-sliders"></i> Reset Password</a></a>
 					<div class="dropdown-divider"></div>
 					<a href="/../sms/logout.php" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></a>

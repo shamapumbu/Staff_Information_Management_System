@@ -21,7 +21,7 @@
         $bonus = $_POST['bonus'];
 
         //Checks if information entered is of the correct type and format
-        /*if (!preg_match('/^[a-zA-Z\s]+$/',$fname)) {
+        /* if (!preg_match('/^[a-zA-Z\s]+$/',$fname)) {
             $errors['fname_error'] = 'Please enter only uppercase and lowercase letters';  
         }
 
@@ -42,7 +42,7 @@
         } */
 
         //Checks to see if there are no errors at all in the form
-        if(!array_filter($errors)) {
+        if (!array_filter($errors)) {
             //if not, reassign values of variables
 
             $job_id = mysqli_real_escape_string($conn,$_POST['job_id']);
