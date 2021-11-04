@@ -3,7 +3,7 @@
 
     include('components/admin_nav.php');
 
-    include('add.php');
+    include('add_job.php');
 
     //Create query
     $sql = 'SELECT job_id, job_description, salary, bonus FROM job ORDER BY job_id';
@@ -106,12 +106,12 @@
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <label>Salary</label>
-                    <input type="text" class="form-control" placeholder="Salary" name="Salary"  value="<?php echo htmlspecialchars($salary);?>" required>
+                    <input type="text" class="form-control" placeholder="Salary" name="salary"  value="<?php echo htmlspecialchars($salary);?>" required>
                     <div class="warning"><?php echo $errors['salary_error']?></div>
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <label>Bonus</label>
-                    <input type="text" class="form-control" placeholder="Bonus" name="Bonus"  value="<?php echo htmlspecialchars($job_description);?>" required>
+                    <input type="text" class="form-control" placeholder="Bonus" name="bonus"  value="<?php echo htmlspecialchars($job_description);?>" required>
                     <div class="warning"><?php echo $errors['bonus_error']?></div>
                 </div>
             </div>
