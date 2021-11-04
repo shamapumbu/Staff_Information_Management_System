@@ -1,7 +1,7 @@
 <?php
-    include('config/db_connection.php');
+    include('../config/db_connection.php');
 
-    include('components/admin_nav.php');
+    include('../components/admin_nav.php');
 
     include('add.php');
 
@@ -20,6 +20,49 @@
 
     // //close connection to database
     // mysqli_close($conn);
+
+
+    //Get jobs
+    $sql = 'SELECT job_id FROM job';
+    // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
+
+    //Run query and fetch result
+    $result = mysqli_query($conn,$sql);
+
+    //Store result in associative array
+    $jobs = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+
+    //Get departments
+    $sql = 'SELECT dept_id FROM department';
+    // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
+
+    //Run query and fetch result
+    $result = mysqli_query($conn,$sql);
+
+    //Store result in associative array
+    $departments = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
+    //Get Branches
+    $sql = 'SELECT branch_id FROM branch';
+    // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
+
+    //Run query and fetch result
+    $result = mysqli_query($conn,$sql);
+
+    //Store result in associative array
+    $branches = mysqli_fetch_all($result,MYSQLI_ASSOC);
+    
+
+    //Get Projects
+    $sql = 'SELECT project_no FROM project';
+    // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
+
+    //Run query and fetch result
+    $result = mysqli_query($conn,$sql);
+
+    //Store result in associative array
+    $projects = mysqli_fetch_all($result,MYSQLI_ASSOC);
 
 ?>
 
@@ -62,7 +105,6 @@
                 </tr>
             </thead>
             <tbody>
-                
                     <?php foreach ($employees as $employee) : ?>
                     <tr>
                         <th scope="row"><?php echo htmlspecialchars($employee['emp_id'])?></th>
@@ -70,7 +112,13 @@
                         <td><?php echo htmlspecialchars($employee['last_name'])?></td>
                         <td><?php echo htmlspecialchars($employee['job_id'])?></td>
                         <td><?php echo htmlspecialchars($employee['dept_id'])?></td>
-                        <td><a href="">More Info</a></td>
+                        <td>
+                        <?php 
+                            echo '<a href="view.php?emp_id='.$employee['emp_id'].'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                            echo '<a href="update.php?emp_id='. $employee['emp_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                            echo '<a href="delete.php?emp_id='. $employee['emp_id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash delete-btn" style="color:red;"></span></a>';
+                        ?>
+                        </td>
                     </tr>
                      <?php endforeach; ?>
                   
@@ -149,30 +197,36 @@
                     <label>Job ID</label>
                     <select class="form-control" name="job_id">
                         <option selected value="<?php echo htmlspecialchars($job_id);?>">Choose Job ID...</option>
-                        <option>ADMIN</option>
-                        <option>PROGM</option>
+                        <?php foreach ($jobs as $job) : ?>
+                            <option><?php echo htmlspecialchars($job['job_id'])?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="form-group col-md-3 col-md-6">
                     <label>Branch ID</label>
                     <select class="form-control" name="branch_id">
                         <option selected value="<?php echo htmlspecialchars($branch_id);?>">Choose Branch ID...</option>
-                        <option>1111</option>
+                        <?php foreach ($branches as $branch) : ?>
+                            <option><?php echo htmlspecialchars($branch['branch_id'])?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div> 
                 <div class="form-group col-md-3 col-md-6">
                     <label>Department ID</label>
                     <select class="form-control" name="dept_id">
                         <option selected value="<?php echo htmlspecialchars($dept_id);?>">Choose Department ID...</option>
-                        <option>HMR</option>
-                        <option>CMP</option>
+                        <?php foreach ($departments as $department) : ?>
+                            <option><?php echo htmlspecialchars($department['dept_id'])?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>  
                 <div class="form-group col-md-3 col-md-6">
-                    <label>Project Number</label>
+                    <label>Project ID</label>
                     <select class="form-control" name="project_no">
-                        <option selected value="<?php echo htmlspecialchars($project_no);?>">Choose Project Number ID...</option>
-                        <option>101210</option>
+                        <option selected value="<?php echo htmlspecialchars($project_no);?>">Choose Project ID...</option>
+                        <?php foreach ($projects as $project) : ?>
+                            <option><?php echo htmlspecialchars($project['project_no'])?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>               
             </div>

@@ -32,6 +32,9 @@ body {
 	background: #fff;
 	padding-left: 16px;
 	padding-right: 16px;
+	position: sticky;
+	top: 0%;
+	z-index: 8;
 	border-bottom: 1px solid #d6d6d6;
 	box-shadow: 0 0 4px rgba(0,0,0,.1);
 }
@@ -156,28 +159,22 @@ body {
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="padding-right: 75px;">
 		<div class="navbar-nav">
-			<a href="admin.php" class="nav-item nav-link">Dashboard</a>
-			<a href="employee.php" class="nav-item nav-link">Employees</a>
-			<a href="dept.php" class="nav-item nav-link">Departments</a>
-			<a href="job.php" class="nav-item nav-link">Jobs</a>
-      <a href="#" class="nav-item nav-link">Projects</a>
-      <a href="#" class="nav-item nav-link">Branches</a>
-      <a href="leave_app.php" class="nav-item nav-link">Holidays</a>
+			<a href="/../sms/admin_dash.php" class="nav-item nav-link">Dashboard</a>
+			<a href="/../sms/employee/employee.php" class="nav-item nav-link">Employees</a>
+			<a href="/../sms/department/dept.php" class="nav-item nav-link">Departments</a>
+			<a href="#" class="nav-item nav-link">Projects</a>
+			<a href="/../sms/job/job.php" class="nav-item nav-link">Job</a>
+			<a href="#" class="nav-item nav-link">Branches</a>
+			<a href="/../sms/admin_leave/leave_app.php" class="nav-item nav-link">Holidays</a>
 		</div>
-		<form class="navbar-form form-inline">
-			<div class="input-group search-box">								
-				<input type="text" id="search" class="form-control" placeholder="Search by Name">
-				<span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
-			</div>
-		</form>
 		<div class="navbar-nav ml-auto">
 			<div class="nav-item dropdown">
 				<a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><?= $_SESSION['first_name']?> <b class="caret"></b></a>
 				<div class="dropdown-menu">
-					<a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></a>
-					<a href="../sms/reset-password.php" class="dropdown-item"><i class="fa fa-sliders"></i> Reset Password</a></a>
+					<a href="/../sms/profile.php" class="dropdown-item"><i class="fa fa-user-o"></i> Profile</a></a>
+					<a href="/../sms/reset-password.php" class="dropdown-item"><i class="fa fa-sliders"></i> Reset Password</a></a>
 					<div class="dropdown-divider"></div>
-					<a href="../sms/logout.php" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></a>
+					<a href="/../sms/logout.php" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></a>
 				</div>
 			</div>
 		</div>

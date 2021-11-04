@@ -1,7 +1,7 @@
 <?php 
-    include('config/db_connection.php');
+    include('../config/db_connection.php');
 
-	include('components/navigation.php');
+	include('../components/navigation.php');
 
     $messages = array('notification'=>'');
 
