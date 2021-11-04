@@ -156,7 +156,7 @@
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <label>Date of Birth</label>
-                    <input type="date" class="form-control" value="" min="1900-01-01" max="2021-10-07" name="dob"  value="<?php echo htmlspecialchars($dob);?>" required>
+                    <input type="date" class="form-control" value="" name="dob"  value="<?php echo htmlspecialchars($dob);?>" required>
                 </div>
                 <div class="form-group col-lg-2 col-md-6">
                     <label>Gender</label>
@@ -187,7 +187,7 @@
                 </div> 
                 <div class="col-lg-2 col-md-6">
                     <label>Join Date</label>
-                    <input type="date" class="form-control" value="" min="1970-01-01" max="2021-10-07" name="join_date" value="<?php echo htmlspecialchars($join_date);?>" required>
+                    <input type="date" class="form-control" value="" name="join_date" value="<?php echo htmlspecialchars($join_date);?>" required>
                 </div>                     
             </div>
 

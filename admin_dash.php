@@ -7,6 +7,16 @@
         header("location:login.php");
     }
 
+    //Create query
+    $sql = 'SELECT emp_id, first_name, last_name, job_id, dept_id FROM employee ORDER BY emp_id';
+    // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
+
+    //Run query and fetch result
+    $result = mysqli_query($conn,$sql);
+
+    //Store result in associative array
+    $employees = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
     $sql = 'SELECT * FROM leave_tb ORDER BY leave_id';
 
     $result = mysqli_query($conn,$sql);
@@ -37,6 +47,18 @@
     $project_num_result = mysqli_query($conn,$project_num_query);
     $project_num_array = mysqli_fetch_array($project_num_result);
     $total_project_num = $project_num_array['COUNT(*)'];
+
+    //Departments query
+    $dept_num_query = 'SELECT COUNT(*) FROM department';
+    $dept_num_result = mysqli_query($conn,$dept_num_query);
+    $dept_num_array = mysqli_fetch_array($dept_num_result);
+    $total_dept_num = $dept_num_array['COUNT(*)'];
+
+    //Branches Number Query
+    $branches_num_query = 'SELECT COUNT(*) FROM branch';
+    $branches_num_result = mysqli_query($conn,$branches_num_query);
+    $branches_num_array = mysqli_fetch_array($branches_num_result);
+    $total_branches_num = $branches_num_array['COUNT(*)'];
 
 ?>
 
@@ -89,19 +111,54 @@
                         <div class="card">
                             <h5 class="card-header">Departments</h5>
                             <div class="card-body">
-                              <h5 class="card-title">3</h5>
+                              <h5 class="card-title"><?php echo $total_dept_num?></h5>
                               <p class="card-text">Number of Departments</p>
                             </div>
                           </div>
                     </div>
                     <div class="col-12 col-md-6 mb-4 mb-lg-0 col-lg-3">
                         <div class="card">
-                            <h5 class="card-header">Total Expenditure</h5>
+                            <h5 class="card-header">Branches</h5>
                             <div class="card-body">
-                              <h5 class="card-title">$1,000,000.00</h5>
-                              <p class="card-text">Employee/Project Expenditure</p>
+                              <h5 class="card-title"><?php echo $total_branches_num?></h5>
+                              <p class="card-text">Number of Branches</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
+      <!-- checks if any record for this type of entity exist. If yes then show the records otherwise display message to show that no records exist-->
+      <?php if (count($employees) > 0) : ?>
+        <table class="table table-striped">
+            <thead class="thead">
+                <tr>
+                    <th scope="col">Employe ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Department ID</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <?php foreach ($employees as $employee) : ?>
+                    <tr>
+                        <th scope="row"><?php echo htmlspecialchars($employee['emp_id'])?></th>
+                        <td><?php echo htmlspecialchars($employee['first_name'])?></td>
+                        <td><?php echo htmlspecialchars($employee['last_name'])?></td>
+                        <td><?php echo htmlspecialchars($employee['dept_id'])?></td>
+                        <td>
+                        <?php 
+                            echo '<a href="view.php?emp_id='.$employee['emp_id'].'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                            echo '<a href="update.php?emp_id='. $employee['emp_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                            echo '<a href="delete.php?emp_id='. $employee['emp_id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash delete-btn" style="color:red;"></span></a>';
+                        ?>
+                        </td>
+                    </tr>
+                     <?php endforeach; ?>
+                  
+            </tbody>
+        </table>
+        <?php else: ?>
+            <?php echo $errors['no_records']?>
+        <?php endif; ?> 
 </div>

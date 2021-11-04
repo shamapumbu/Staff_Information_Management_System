@@ -7,7 +7,7 @@
     if (isset($_GET['emp_id'])) {
         $emp_id = $_GET['emp_id'];
 
-        $sql = "SELECT * FROM employee WHERE emp_id=$emp_id";
+        $sql = "SELECT * FROM employee WHERE emp_id='$emp_id'";
 
         $result = mysqli_query($conn,$sql);
 

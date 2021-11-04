@@ -18,7 +18,6 @@
 body {
     color: #566787;
     background: #f5f5f5;
-    font-family: 'Roboto', sans-serif;
 }
 .table-responsive {
     margin: 30px 0;
@@ -93,9 +92,6 @@ table.table td .btn.manage:hover {
 
 
 /* Modal Styles */
-body {
-	font-family: 'Varela Round', sans-serif;
-}
 .modal-confirm {		
 	color: #636363;
 	width: 550px;

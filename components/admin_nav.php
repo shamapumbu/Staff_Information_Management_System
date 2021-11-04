@@ -162,9 +162,9 @@ body {
 			<a href="/../sms/admin_dash.php" class="nav-item nav-link">Dashboard</a>
 			<a href="/../sms/employee/employee.php" class="nav-item nav-link">Employees</a>
 			<a href="/../sms/department/dept.php" class="nav-item nav-link">Departments</a>
-			<a href="#" class="nav-item nav-link">Projects</a>
+			<a href="/../sms/project/project.php" class="nav-item nav-link">Projects</a>
 			<a href="/../sms/job/job.php" class="nav-item nav-link">Job</a>
-			<a href="#" class="nav-item nav-link">Branches</a>
+			<a href="/../sms/branch/branch.php" class="nav-item nav-link">Branches</a>
 			<a href="/../sms/admin_leave/leave_app.php" class="nav-item nav-link">Holidays</a>
 		</div>
 		<div class="navbar-nav ml-auto">
