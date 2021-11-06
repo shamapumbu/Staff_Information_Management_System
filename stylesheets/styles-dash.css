@@ -1,3 +1,14 @@
+.container {
+    margin-top: 20px;
+    padding: 5px 30px 5px;
+    background-color: #fff;
+}
+
+#info-sum {
+    text-decoration: underline;
+    margin-bottom: .5%
+}
+
 .sidebar {
     position: fixed;
     top: 0;

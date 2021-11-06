@@ -42,21 +42,34 @@
 <html>
     <!-- Displaying Data in table format -->
     <div class="container content">
-        <h2 id="page-title">Jobs</h2>
-        <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary" type="submit" style="margin-top: 20px;">Add Job <i class="fas fa-user-plus"></i></button>
+    <div class="row" style="padding-top: 20px;">
+            <div class="col-sm-6">
+                <h4 id="page-title">Manage <b>Jobs</b></h4>
+            </div>
+            <div class="col-sm-3">
+                <form class="navbar-form form-inline">
+                    <div class="input-group search-box">								
+                        <input type="text" id="search" class="form-control" placeholder="Search for Job">
+                        <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-3" style="text-align: right;">
+                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-success" type="submit">Add Job <i class="fas fa-user-plus"></i></button>
+            </div>
+        </div>
         <div style="margin-top:20px;">
             <?php echo $errors['pop_up']?>
         </div>
 
         <!-- checks if any record for this type of entity exist. If yes then show the records otherwise display message to show that no records exist-->
         <?php if (count($jobs) > 0) : ?>
-        <table class="table table-striped">
+        <table class="table table-hover table-striped">
             <thead class="thead">
                 <tr>
                     <th scope="col">Job ID</th>
                     <th scope="col">Job Description</th>
                     <th scope="col">Salary</th>
-                    <th scope="col">Bonus</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -67,7 +80,6 @@
                         <th scope="row"><?php echo htmlspecialchars($job['job_id'])?></th>
                         <td><?php echo htmlspecialchars($job['job_description'])?></td>
                         <td><?php echo htmlspecialchars($job['salary'])?></td>
-                        <td><?php echo htmlspecialchars($job['bonus'])?></td>
                         <td>
                         <?php 
                             echo '<a href="view_job.php?job_id='.$job['job_id'].'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
@@ -102,23 +114,18 @@
             <div class="form-row">
                 <div class="col-lg-4 col-md-6">
                     <label>Job ID</label>
-                    <input type="text" class="form-control" placeholder="ABCDE" name="job_id" value="<?php echo htmlspecialchars($job_id);?>" required>
+                    <input type="text" class="form-control" placeholder="ADMIN" name="job_id" value="<?php echo htmlspecialchars($job_id);?>" required>
                     <div class="warning"><?php echo $errors['job_id_error']?></div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <label>Job Description</label>
-                    <input type="text" class="form-control" placeholder="Description" name="job_description"  value="<?php echo htmlspecialchars($job_description);?>" required>
+                    <input type="text" class="form-control" placeholder="Administrator" name="job_description"  value="<?php echo htmlspecialchars($job_description);?>" required>
                     <div class="warning"><?php echo $errors['job_description_error']?></div>
                 </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <label>Salary</label>
-                    <input type="text" class="form-control" placeholder="Salary" name="salary"  value="<?php echo htmlspecialchars($salary);?>" required>
+                    <input type="text" class="form-control" placeholder="10000.00" name="salary"  value="<?php echo htmlspecialchars($salary);?>" required>
                     <div class="warning"><?php echo $errors['salary_error']?></div>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <label>Bonus</label>
-                    <input type="text" class="form-control" placeholder="Bonus" name="bonus"  value="<?php echo htmlspecialchars($job_description);?>" required>
-                    <div class="warning"><?php echo $errors['bonus_error']?></div>
                 </div>
             </div>
 

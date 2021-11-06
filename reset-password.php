@@ -52,19 +52,29 @@
     <meta charset="UTF-8">
     <title>Reset Password</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merienda+One">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        body{ font: 14px sans-serif; background-color: #EEEEEE;}
-        .wrapper{ width: 360px; padding: 20px; margin-top: 50px;}
+        body{background-color: #EEEEEE;}
+        .wrapper{ width: 450px; padding: 50px; margin-top: 50px; background-color: #fff;}
+        .cancel-btn:hover {
+            color: #fff !important;
+        }
+        .cancel-btn {
+            text-decoration: none !important;
+        }
     </style>
 </head>
 <body>
     <div class="wrapper container">
         <h2>Reset Password</h2>
         <p>Please fill out this form to reset your password.</p>
+        <div class="alert alert-info" role="alert">
+            Note that you will automatically be logged out upon successfull change of password!
+        </div>
         <?php echo $messages['notification']?>
-        <div class="alert alert-notification" role="alert" style="text-align: left">
-            <b>NOTE THAT YOU WILL AUTOMATICALLY BE LOGGED OUT UPON CHANGING YOUR PASSWORD</b>
-        </div>;
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <!-- <div class="form-group">
                 <label>Confirm ID</label> -->
@@ -88,7 +98,7 @@
             </div>
             <div class="form-group"> 
                 <input type="submit" class="btn btn-primary" name="update" value="Submit">
-                <a class="btn btn-link ml-2" href="javascript:history.back()">Cancel</a>
+                <a class="cancel-btn btn btn-link ml-2 btn-outline-secondary" href="javascript:history.back()" style="color: #6B7378;">Cancel</a>
             </div>
             
         </form>

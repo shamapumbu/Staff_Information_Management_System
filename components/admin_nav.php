@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../stylesheets/styles-dash.css">
 	<!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/173e7e290b.js" crossorigin="anonymous"></script>
 	
@@ -165,7 +166,7 @@ body {
 			<a href="/../sms/project/project.php" class="nav-item nav-link">Projects</a>
 			<a href="/../sms/job/job.php" class="nav-item nav-link">Job</a>
 			<a href="/../sms/branch/branch.php" class="nav-item nav-link">Branches</a>
-			<a href="/../sms/admin_leave/leave_app.php" class="nav-item nav-link">Holidays</a>
+			<a href="/../sms/admin_leave/leave_app.php" class="nav-item nav-link">Leave</a>
 		</div>
 		<div class="navbar-nav ml-auto">
 			<div class="nav-item dropdown">

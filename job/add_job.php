@@ -48,10 +48,9 @@
             $job_id = mysqli_real_escape_string($conn,$_POST['job_id']);
             $job_description = mysqli_real_escape_string($conn,$_POST['job_description']);
             $salary = mysqli_real_escape_string($conn,$_POST['salary']);
-            $bonus = mysqli_real_escape_string($conn,$_POST['bonus']);
 
             //query to insert data into database
-            $query = "INSERT INTO job(job_id,job_description,salary,bonus) VALUES('$job_id','$job_description','$salary','$bonus')";
+            $query = "INSERT INTO job(job_id,job_description,salary) VALUES('$job_id','$job_description','$salary')";
             
             //creates query and if query is true of successful then the user is redirected to the home page
             if (mysqli_query($conn,$query)) {

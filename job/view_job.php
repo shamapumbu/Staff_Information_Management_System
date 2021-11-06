@@ -47,10 +47,6 @@
                         <label>Salary</label>
                         <h4><b><?php echo $job['0']["salary"]; ?></b></h4>
                     </div>
-                    <div class="form-group col-6">
-                        <label>Bonus</label>
-                        <h4><b><?php echo $job['0']["bonus"]; ?></b></h4>
-                    </div>
             </div>
 
             <div class="row">

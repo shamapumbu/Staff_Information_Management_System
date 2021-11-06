@@ -14,143 +14,11 @@
 <html lang="en">
 <head>
 <title>row Leaves</title>
+<link rel="stylesheet" href="../stylesheets/styles-table.css">
 <style>
 body {
     color: #566787;
-    background: #f5f5f5;
-}
-.table-responsive {
-    margin: 30px 0;
-}
-.table-wrapper {
-    width: 1000px;
-    background: #fff;
-	margin: 0 auto;
-    padding: 20px 30px 5px;
-    box-shadow: 0 0 1px 0 rgba(0,0,0,.25);
-}
-.table-title .btn-group {
-    float: right;
-}
-.table-title .btn {
-    min-width: 50px;
-    border-radius: 2px;
-    border: none;
-    padding: 6px 12px;
-    font-size: 95%;
-    outline: none !important;
-    height: 30px;
-}
-.table-title {
-    min-width: 100%;
-    border-bottom: 1px solid #e9e9e9;
-    padding-bottom: 15px;
-    margin-bottom: 5px;
-    background: #fff;
-    margin: -20px -31px 10px;
-    padding: 15px 30px;
-    color: #000;
-}
-.table-title h2 {
-    margin: 2px 0 0;
-    font-size: 24px;
-}
-table.table {
-    min-width: 100%;
-}
-table.table tr th, table.table tr td {
-    border-color: #e9e9e9;
-    padding: 12px 15px;
-}
-table.table tr th:first-child {
-    width: 40px;
-}
-table.table tr th:last-child {
-    width: 100px;
-}
-table.table-striped tbody tr:nth-of-type(odd) {
-    background-color: #fcfcfc;
-}
-table.table-striped.table-hover tbody tr:hover {
-    background: #f5f5f5;
-}
-table.table td a {
-    color: #2196f3;
-}
-table.table td .btn.manage {
-    padding: 2px 10px;
-    background: #37BC9B;
-    color: #fff;
-    border-radius: 2px;
-}
-table.table td .btn.manage:hover {
-    background: #2e9c81;		
-}
-.atext:link {
-    color: #fff; 
-}
-
-
-/* Modal Styles */
-.modal-confirm {		
-	color: #636363;
-	width: 550px;
-}
-.modal-confirm .modal-content {
-	padding: 20px;
-	border-radius: 5px;
-	border: none;        
-}
-.modal-confirm .modal-header {
-	padding: 0 15px;
-	border-bottom: none;   
-	position: relative;
-}
-.modal-confirm h4 {
-	display: inline-block;
-	font-size: 26px;
-}
-.modal-confirm .close {
-	position: absolute;
-	top: -5px;
-	right: -5px;
-}
-.modal-confirm .modal-body {
-	color: #999;
-}
-.modal-confirm .modal-footer {
-	background: #ecf0f1;
-	border-color: #e6eaec;
-	text-align: right;
-	margin: 0 -20px -20px;
-	border-radius: 0 0 5px 5px;
-}	
-.modal-confirm .btn {
-	color: #fff;
-	border-radius: 4px;
-	transition: all 0.4s;
-	border: none;
-	padding: 8px 20px;
-	outline: none !important;
-}	
-.modal-confirm .btn-info {
-	background: #b0c1c6;
-}
-.modal-confirm .btn-info:hover, .modal-confirm .btn-info:focus {
-	background: #92a9af;
-}
-.modal-confirm .btn-danger {
-	background: #f15e5e;
-}
-.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
-	background: #ee3535;
-}
-.modal-confirm .modal-footer .btn + .btn {
-	margin-left: 10px;
-}
-.trigger-btn {
-	display: inline-block;
-	margin: 100px auto;
+    background: #eee;
 }
 
 </style>
@@ -195,7 +63,7 @@ $(document).ready(function(){
                     <div class="col-sm-3">
                         <form class="navbar-form form-inline">
                             <div class="input-group search-box">								
-                                <input type="text" id="search" class="form-control" placeholder="Search By Employee ID">
+                                <input type="text" id="search" class="form-control" placeholder="Search for Leave">
                                 <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
                             </div>
                         </form>
@@ -222,7 +90,7 @@ $(document).ready(function(){
                 <thead>
                     <tr>
                         <th scope="col">Leave ID</th>
-                        <th scope="col">Employe ID</th>
+                        <th scope="col">Employee ID</th>
                         <th scope="col">Reason for leave request</th>
                         <th scope="col">Start Date</th>
                         <th scope="col">End Date</th>
@@ -244,8 +112,11 @@ $(document).ready(function(){
                             <tr data-status="<?php echo htmlspecialchars($row['status'])?>" scope="row">
                             <td><?php echo htmlspecialchars($row['leave_id'])?></td>
                             <?php $_SESSION['leave_id'] = $row['leave_id'];?>
-                            <td><a href="employee.php"><?php echo htmlspecialchars($row['emp_id'])?></a></td>
-                            <?php $_SESSION['emp_id'] = $row['emp_id'];?>
+                            <!-- <td><a href="employee/view.php?emp_id='.$employee['emp_id'].'"><?php echo htmlspecialchars($row['emp_id'])?></a></td> -->
+                            <td>
+                                <?php echo '<a href="../employee/view.php?emp_id='.$row['emp_id'].'">'?><?php echo htmlspecialchars($row['emp_id']) ?><?php echo '</a>'?>
+                            </td>
+                            <?php $row['emp_id'];?>
                             <td><?php echo htmlspecialchars($row['leave_description'])?></td>
                             <td><?php echo htmlspecialchars($row['start_date'])?></td>
                             <td><?php echo htmlspecialchars($row['end_date'])?></td>
@@ -271,7 +142,7 @@ $(document).ready(function(){
         </div> 
     </div>
     <?php } else { 
-        echo '<div class="alert alert-danger"><em>No records were found.</em></div>';
+        echo '<div class="alert alert-danger" style="margin-left:auto; margin-right:auto; width:100%; text-align: center"><em>No records were found.</em></div>';
     } ?>
     <!-- Table --> 
 </div>

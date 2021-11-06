@@ -42,15 +42,29 @@
 <html>
     <!-- Displaying Data in table format -->
     <div class="container content">
-        <h2 id="page-title">Departments</h2>
-        <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary" type="submit" style="margin-top: 20px;">Add Department<i class="fas fa-user-plus"></i></button>
+    <div class="row" style="padding-top: 20px;">
+            <div class="col-sm-6">
+                <h4 id="page-title">Manage <b>Department</b></h4>
+            </div>
+            <div class="col-sm-3">
+                <form class="navbar-form form-inline">
+                    <div class="input-group search-box">								
+                        <input type="text" id="search" class="form-control" placeholder="Search for Department">
+                        <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-3" style="text-align: right;">
+                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-success" type="submit">Add Department <i class="fas fa-user-plus"></i></button>
+            </div>
+        </div>
         <div style="margin-top:20px;">
             <?php echo $errors['pop_up']?>
         </div>
 
         <!-- checks if any record for this type of entity exist. If yes then show the records otherwise display message to show that no records exist-->
         <?php if (count($departments) > 0) : ?>
-        <table class="table table-striped">
+        <table class="table table-hover table-striped">
             <thead class="thead">
                 <tr>
                   <th scope="col">Department ID</th>

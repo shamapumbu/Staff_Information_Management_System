@@ -16,6 +16,7 @@
     $branch_id = '';
     $dept_id = '';
     $project_no = '';
+    $bonus = '';
 
     $minDigits = 10;
     $maxDigits = 10;
@@ -35,6 +36,7 @@
         $branch_id = $_POST['branch_id'];
         $dept_id = $_POST['dept_id'];
         $project_no = $_POST['project_no'];
+        $bonus = $_POST['bonus'];
 
         //Checks if information entered is of the correct type and format
         if (!preg_match('/^[a-zA-Z\s]+$/',$fname)) {
@@ -72,9 +74,10 @@
             $branch_id = mysqli_real_escape_string($conn,$_POST['branch_id']);
             $dept_id = mysqli_real_escape_string($conn,$_POST['dept_id']);
             $project_no = mysqli_real_escape_string($conn,$_POST['project_no']);
+            $bonus = mysqli_real_escape_string($conn,$_POST['bonus']);
 
             //query to insert data into database
-            $query = "INSERT INTO employee(first_name,last_name,date_of_birth,gender,phone,email,home_address,join_date,job_id,branch_id,dept_id,project_no) VALUES('$fname','$lname','$dob','$gender','$phone','$email','$address','$join_date','$job_id','$branch_id','$dept_id','$project_no')";
+            $query = "INSERT INTO employee(first_name,last_name,date_of_birth,gender,phone,email,home_address,join_date,job_id,branch_id,dept_id,project_no,bonus) VALUES('$fname','$lname','$dob','$gender','$phone','$email','$address','$join_date','$job_id','$branch_id','$dept_id','$project_no','$bonus')";
             
             //creates query and if query is true of successful then the user is redirected to the home page
             if (mysqli_query($conn,$query)) {

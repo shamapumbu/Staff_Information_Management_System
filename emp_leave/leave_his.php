@@ -120,6 +120,9 @@ $(document).ready(function(){
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
+                <?php
+                    if(mysqli_num_rows($result) > 0){
+                ?>
                     <div class="col-sm-6"><h2>My <b>Leave History</b></h2></div>
                     <div class="col-sm-6">
                         <div class="btn-group" data-toggle="buttons">
@@ -180,8 +183,14 @@ $(document).ready(function(){
                 <?php
                 }
                 ?>
-                </tr>
-                
+                </tr>  
     </tbody>
 </table>
+</div> 
+    </div>
+    <?php } else { 
+        echo '<div class="alert alert-danger" style="margin-left:auto; margin-right:auto; width:100%; text-align: center"><em>No records were found.</em></div>';
+    } ?>
+    <!-- Table --> 
 </div>
+</body>

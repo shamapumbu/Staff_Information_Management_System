@@ -21,16 +21,6 @@
     // //close connection to database
     // mysqli_close($conn);
 
-    //Get departments
-    $sql = 'SELECT dept_id FROM department';
-    // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
-
-    //Run query and fetch result
-    $result = mysqli_query($conn,$sql);
-
-    //Store result in associative array
-    $departments = mysqli_fetch_all($result,MYSQLI_ASSOC);
-
 ?>
 
 
@@ -52,15 +42,29 @@
 <html>
     <!-- Displaying Data in table format -->
     <div class="container content">
-        <h2 id="page-title">Projects</h2>
-        <button data-toggle="modal" data-target="#exampleModal" class="btn btn-primary" type="submit" style="margin-top: 20px;">Add Project<i class="fas fa-user-plus"></i></button>
+    <div class="row" style="padding-top: 20px;">
+            <div class="col-sm-6">
+                <h4 id="page-title">Manage <b>Projects</b></h4>
+            </div>
+            <div class="col-sm-3">
+                <form class="navbar-form form-inline">
+                    <div class="input-group search-box">								
+                        <input type="text" id="search" class="form-control" placeholder="Search for Project">
+                        <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-3" style="text-align: right;">
+                <button data-toggle="modal" data-target="#exampleModal" class="btn btn-success" type="submit">Add Project <i class="fas fa-user-plus"></i></button>
+            </div>
+        </div>
         <div style="margin-top:20px;">
             <?php echo $errors['pop_up']?>
         </div>
 
         <!-- checks if any record for this type of entity exist. If yes then show the records otherwise display message to show that no records exist-->
         <?php if (count($projects) > 0) : ?>
-        <table class="table table-striped">
+        <table class="table table-hover table-striped">
             <thead class="thead">
                 <tr>
                   <th scope="col">Project Number</th>
@@ -112,33 +116,24 @@
         <form action="add_project.php" method="POST">
             <!-- Start of form -->
             <div class="form-row">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-3">
                     <label>Project Name</label>
                     <input type="text" class="form-control" placeholder="Database Project" name="project_name" value="<?php echo htmlspecialchars($project_name);?>" required>
                     <div class="warning"><?php echo $errors['project_name_error']?></div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-3 col-md-3">
                     <label>Project Budget</label>
                     <input type="text" class="form-control" placeholder="100000.00" name="project_budget" value="<?php echo htmlspecialchars($project_budget);?>" required>
                     <div class="warning"><?php echo $errors['project_budget_error']?></div>
                 </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-3 col-md-3">
                     <label>Date Commissioned</label>
                     <input type="date" class="form-control" value="" name="date_comissioned"  value="<?php echo htmlspecialchars($date_comissioned);?>" required>
                 </div>
-                <div class="col-lg-2 col-md-6">
-                    <label>Expected Completion Date</label>
+                <div class="col-lg-3 col-md-3">
+                    <label>Completion Date</label>
                     <input type="date" class="form-control" value="" name="expected_completion_date"  value="<?php echo htmlspecialchars($expected_completion_date);?>" required>
-                </div>
-                <div class="form-group col-md-3 col-md-6">
-                    <label>Department ID</label>
-                    <select class="form-control" name="dept_id">
-                        <option selected value="<?php echo htmlspecialchars($dept_id);?>">Choose Department ID...</option>
-                        <?php foreach ($departments as $department) : ?>
-                            <option><?php echo htmlspecialchars($department['dept_id'])?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>               
+                </div>             
             </div>
 
             <div class="modal-footer">
