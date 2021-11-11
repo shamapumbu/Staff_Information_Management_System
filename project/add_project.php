@@ -8,7 +8,6 @@
     $project_budget = '';
     $date_comissioned = '';
     $expected_completion_date = '';
-    $dept_id = '';
 
     //Checks if form has been submitted 
     if (isset($_POST['submit'])) {
@@ -17,7 +16,6 @@
         $project_budget = $_POST['project_budget'];
         $date_comissioned = $_POST['date_comissioned'];
         $expected_completion_date = $_POST['expected_completion_date'];
-        $dept_id = $_POST['dept_id'];
          
         // //Checks if information entered is of the correct type and format
         
@@ -36,10 +34,9 @@
             $project_budget = mysqli_real_escape_string($conn,$_POST['project_budget']); 
             $date_comissioned = mysqli_real_escape_string($conn,$_POST['date_comissioned']);
             $expected_completion_date = mysqli_real_escape_string($conn,$_POST['expected_completion_date']); 
-            $dept_id = mysqli_real_escape_string($conn,$_POST['dept_id']); 
 
             //query to insert data into database
-            $query = "INSERT INTO project(project_budget,project_name,date_comissioned,expected_completion_date,dept_id) VALUES('$project_budget','$project_name','$date_comissioned','$expected_completion_date','$dept_id')";
+            $query = "INSERT INTO project(project_budget,project_name,date_comissioned,expected_completion_date) VALUES('$project_budget','$project_name','$date_comissioned','$expected_completion_date')";
             
             //creates query and if query is true of successful then the user is redirected to the home page
             if (mysqli_query($conn,$query)) {

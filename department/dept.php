@@ -82,7 +82,7 @@
                         <?php 
                             echo '<a href="view_dept.php?dept_id='.$department['dept_id'].'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                             echo '<a href="update.php?dept_id='. $department['dept_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                            echo '<a href="delete.php?dept_id='. $department['dept_id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash delete-btn" style="color:red;"></span></a>';
+                            echo '<a href="delete_dept.php?dept_id='. $department['dept_id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash delete-btn" style="color:red;"></span></a>';
                         ?>
                         </td>
                     </tr>

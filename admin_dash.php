@@ -65,6 +65,9 @@
 
 <head>
   <link rel="stylesheet" href="stylesheets/styles-dash.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <div class="container">
@@ -157,3 +160,15 @@
         <?php endif; ?>
         <h4 class="col-6"><a href="employee/employee.php" class="btn btn-secondary btn-lg">All Employees</a></h4>
 </div>
+<script type="text/javascript">
+    $(function() {
+      Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+    });
+</script>
+
+<?php 
+    include('components/scripts.php');
+?>
