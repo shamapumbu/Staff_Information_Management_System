@@ -5,22 +5,18 @@
 
     include('add.php');
 
-    //Create query
-    $sql = 'SELECT * FROM employee ORDER BY emp_id';
-    // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
+    $errors['no_records'] = '<div class="alert alert-danger" role="alert" style="text-align: center">No records found</div>';
 
-    //Run query and fetch result
+    $sql = "SELECT * FROM employee ORDER BY emp_id";
+
+    if (isset($_POST['search'])) {
+       $search_term = $_POST['search_box'];
+       $sql = "SELECT * FROM employee  WHERE emp_id LIKE '%$search_term%' OR first_name LIKE '%$search_term%' OR last_name LIKE '%$search_term%' OR job_id LIKE '%$search_term%' OR dept_id LIKE '%$search_term%'";
+    }
+
     $result = mysqli_query($conn,$sql);
-
-    //Store result in associative array
+    //Run query and fetch result
     $employees = mysqli_fetch_all($result,MYSQLI_ASSOC);
-
-    // //free memory of result
-    // mysqli_free_result($result);
-
-    // //close connection to database
-    // mysqli_close($conn);
-
 
     //Get jobs
     $sql = 'SELECT job_id FROM job';
@@ -68,6 +64,7 @@
 
 
 <!DOCTYPE html>
+<link rel="stylesheet" href="../stylesheets/styles-del_confirm.css">
 
 <style>
     .content {
@@ -87,17 +84,30 @@
     <div class="container content">
         
         <div class="row" style="padding-top: 20px;">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <h4 id="page-title">Manage <b>Employees</b></h4>
             </div>
-            <div class="col-sm-3">
-                <form class="navbar-form form-inline">
-                    <div class="input-group search-box">								
-                        <input type="text" id="search" class="form-control" placeholder="Search for Employee">
-                        <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+            <form action="employee.php" method="post" class="col-sm-4">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input type="search" id="search" class="form-control" placeholder="Search" name="search_box"/>
                     </div>
-                </form>
-            </div>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary" name="search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div> 
+                </div>
+            </form>
+
+            <!-- <div class="col-sm-4 input-group">
+                <div class="form-outline">
+                    <input type="search" id="form1" class="form-control" />
+                </div>
+                <button type="button" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div> -->
             <div class="col-sm-3" style="text-align: right;">
                 <button data-toggle="modal" data-target="#exampleModal" class="btn btn-success" type="submit">Add Employee <i class="fas fa-user-plus"></i></button>
             </div>
@@ -106,7 +116,7 @@
             <?php echo $errors['pop_up']?>
         </div>
         <!-- checks if any record for this type of entity exist. If yes then show the records otherwise display message to show that no records exist-->
-        <?php if (count($employees) > 0) : ?>
+        <?php if (!empty($employees)) : ?>
         <table class="table table-hover table-striped">
             <thead class="thead">
                 <tr>
@@ -119,7 +129,7 @@
                 </tr>
             </thead>
             <tbody>
-                    <?php foreach ($employees as $employee) : ?>
+            <?php foreach ($employees as $employee) : ?>
                     <tr>
                         <th scope="row"><?php echo htmlspecialchars($employee['emp_id'])?></th>
                         <td><?php echo htmlspecialchars($employee['first_name'])?></td>
@@ -128,14 +138,18 @@
                         <td><?php echo htmlspecialchars($employee['dept_id'])?></td>
                         <td>
                         <?php 
-                            echo '<a href="view.php?emp_id='.$employee['emp_id'].'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                            echo '<a href="update.php?emp_id='. $employee['emp_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                            echo '<a href="delete.php?emp_id='. $employee['emp_id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash delete-btn" style="color:red;"></span></a>';
+                            echo '<a href="view.php?emp_id='.$employee['emp_id'].'" class="btn btn-primary" title="View Record" data-toggle="tooltip"><span class="fa fa-eye" style="color:white;"></span></a>';
                         ?>
+                        <?php
+                            echo '<a href="update.php?emp_id='. $employee['emp_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
+                        ?>
+                            <a class=" btn btn-danger" data-id="<?php echo $employee['emp_id']?>" onclick="confirmDelete(this);"><span class="fa fa-trash delete-btn" style="color:white;"></span></a>
+                        </td>
+                        <td>
+                            
                         </td>
                     </tr>
-                     <?php endforeach; ?>
-                  
+                <?php endforeach; ?>
             </tbody>
         </table>
         <?php else: ?>
@@ -261,4 +275,45 @@
         </div>
     </div>
     
+<!-- Modal HTML -->
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box">
+                    <i class="fas fa-exclamation"></i>
+				</div>						
+				<h4 class="modal-title w-100">Are you sure?</h4>	
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+                <h6>Do you really want to delete this record? This action cannot be undone.</h6>
+                <form method="GET" action="delete.php" id="form-delete-user">
+                    <input type="hidden" name="emp_id">
+                </form>
+            </div>
+			<div class="modal-footer justify-content-center">
+                <button type="submit" form="form-delete-user" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+		</div>
+	</div>
+</div>
+
+<!-- modal -->
+
+<!-- javascript -->
+
+<script>
+    function confirmDelete(self) {
+        var id = self.getAttribute("data-id");
+    
+        document.getElementById("form-delete-user").emp_id.value = id;
+        $("#myModal").modal("show");
+    }
+</script>
+
+
+
+
 </html>
