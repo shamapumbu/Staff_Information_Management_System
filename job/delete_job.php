@@ -9,6 +9,6 @@ $job_id = $_GET['job_id'];
 $result = mysqli_query($conn, "DELETE FROM job WHERE job_id='$job_id'");
 
 //redirecting to the display page (index.php in our case)
-header("Location:job.php");
+header("Location:confirmation_job.php");
 ?>
 

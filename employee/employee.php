@@ -65,6 +65,7 @@
 
 <!DOCTYPE html>
 <link rel="stylesheet" href="../stylesheets/styles-del_confirm.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
     .content {
@@ -144,9 +145,6 @@
                             echo '<a href="update.php?emp_id='. $employee['emp_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
                         ?>
                             <a class=" btn btn-danger" data-id="<?php echo $employee['emp_id']?>" onclick="confirmDelete(this);"><span class="fa fa-trash delete-btn" style="color:white;"></span></a>
-                        </td>
-                        <td>
-                            
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -275,7 +273,7 @@
         </div>
     </div>
     
-<!-- Modal HTML -->
+<!-- Deletion Modal HTML -->
 <div id="myModal" class="modal fade">
 	<div class="modal-dialog modal-confirm">
 		<div class="modal-content">
@@ -293,7 +291,7 @@
                 </form>
             </div>
 			<div class="modal-footer justify-content-center">
-                <button type="submit" form="form-delete-user" class="btn btn-danger">Delete</button>
+                <button type="submit" form="form-delete-user" class="btn btn-danger" id="submit">Delete</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
 		</div>
@@ -310,10 +308,8 @@
     
         document.getElementById("form-delete-user").emp_id.value = id;
         $("#myModal").modal("show");
+
     }
 </script>
-
-
-
 
 </html>

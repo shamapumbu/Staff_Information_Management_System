@@ -9,6 +9,6 @@ $project_no = $_GET['project_no'];
 $result = mysqli_query($conn, "DELETE FROM project WHERE project_no='$project_no'");
 
 //redirecting to the display page (index.php in our case)
-header("Location:project.php");
+header("location:confirmation_proj.php");
 ?>
 

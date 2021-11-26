@@ -34,7 +34,7 @@
                 $sql = "UPDATE employee SET password ='$new' WHERE emp_id ='$id'";
                 mysqli_query($conn, $sql);
                 $messages['notification'] = '<div class="alert alert-success" role="alert" style="text-align: center">Your Password has been sucessfully changed!</div>'; 
-                header('location:logout.php');
+                header('location:reset-pass-success.php');
             } else {
                 $messages['notification'] = '<div class="alert alert-danger" role="alert" style="text-align: center">Failed to change password! You did not correctly confirm your password</div>';
             }

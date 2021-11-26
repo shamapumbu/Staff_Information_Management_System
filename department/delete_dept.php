@@ -9,6 +9,6 @@ $dept_id = $_GET['dept_id'];
 $result = mysqli_query($conn, "DELETE FROM department WHERE dept_id='$dept_id'");
 
 //redirecting to the display page (index.php in our case)
-header("Location:dept.php");
+header("Location:confirmation_dept.php");
 ?>
 

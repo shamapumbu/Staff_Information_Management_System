@@ -37,7 +37,7 @@
             
             //creates query and if query is true of successful then the user is redirected to the home page
             if (mysqli_query($conn,$query)) {
-                header('location:branch.php');
+                header('location:confirmation_branch.php');
                 $errors['pop_up'] = '<div class="alert alert-success" role="alert" style="text-align: center">Success</div>';    //display a message to show that form has been submitted
             } else {
                 $errors['pop_up'] = '<div class="alert alert-danger" role="alert" style="text-align: center">Failure</div>';    //display a message to show that form has been submitted

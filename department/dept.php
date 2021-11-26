@@ -5,9 +5,16 @@
 
     include('add_dept.php');
 
+    $errors['no_records'] = '<div class="alert alert-danger" role="alert" style="text-align: center">No records found</div>';
+
     //Create query
     $sql = 'SELECT * FROM department ORDER BY dept_id';
     // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
+
+    if (isset($_POST['search'])) {
+        $search_term = $_POST['search_box'];
+        $sql = "SELECT * FROM department  WHERE dept_id LIKE '%$search_term%' OR dept_name LIKE '%$search_term%'";
+     }
 
     //Run query and fetch result
     $result = mysqli_query($conn,$sql);
@@ -25,6 +32,8 @@
 
 
 <!DOCTYPE html>
+<link rel="stylesheet" href="../stylesheets/styles-del_confirm.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
     .content {
@@ -43,17 +52,21 @@
     <!-- Displaying Data in table format -->
     <div class="container content">
     <div class="row" style="padding-top: 20px;">
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <h4 id="page-title">Manage <b>Department</b></h4>
             </div>
-            <div class="col-sm-3">
-                <form class="navbar-form form-inline">
-                    <div class="input-group search-box">								
-                        <input type="text" id="search" class="form-control" placeholder="Search for Department">
-                        <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+            <form action="dept.php" method="post" class="col-sm-4">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input type="search" id="search" class="form-control" placeholder="Search" name="search_box"/>
                     </div>
-                </form>
-            </div>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary" name="search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div> 
+                </div>
+            </form>
             <div class="col-sm-3" style="text-align: right;">
                 <button data-toggle="modal" data-target="#exampleModal" class="btn btn-success" type="submit">Add Department <i class="fas fa-user-plus"></i></button>
             </div>
@@ -80,10 +93,12 @@
                         <td><?php echo htmlspecialchars($department['dept_name'])?></td>
                         <td>
                         <?php 
-                            echo '<a href="view_dept.php?dept_id='.$department['dept_id'].'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                            echo '<a href="update.php?dept_id='. $department['dept_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                            echo '<a href="delete_dept.php?dept_id='. $department['dept_id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash delete-btn" style="color:red;"></span></a>';
+                            echo '<a href="view_dept.php?dept_id='.$department['dept_id'].'" class="btn btn-primary" title="View Record" data-toggle="tooltip"><span class="fa fa-eye" style="color:white; text-align:center;"></span></a>';
                         ?>
+                        <?php
+                            echo '<a href="update.php?dept_id='. $department['dept_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
+                        ?>
+                            <a class=" btn btn-danger" data-id="<?php echo $department['dept_id']?>" onclick="confirmDelete(this);"><span class="fa fa-trash delete-btn" style="color:white;"></span></a>
                         </td>
                     </tr>
                      <?php endforeach; ?>
@@ -110,12 +125,12 @@
         <form action="add_dept.php" method="POST">
             <!-- Start of form -->
             <div class="form-row">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <label>Department Name</label>
                     <input type="text" class="form-control" placeholder="Marketing" name="dept_name" value="<?php echo htmlspecialchars($dept_name);?>" required>
                     <div class="warning"><?php echo $errors['dept_name_error']?></div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <label>Department ID</label>
                     <input type="text" class="form-control" placeholder="MKT" name="dept_id"  value="<?php echo htmlspecialchars($dept_id);?>" required>
                     <div class="warning"><?php echo $errors['dept_id_error']?></div>
@@ -134,4 +149,43 @@
         </div>
     </div>
     
+
+    <!-- Deletion Modal HTML -->
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box">
+                    <i class="fas fa-exclamation"></i>
+				</div>						
+				<h4 class="modal-title w-100">Are you sure?</h4>	
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+                <h6>Do you really want to delete this record? This action cannot be undone.</h6>
+                <form method="GET" action="delete_dept.php" id="form-delete-user">
+                    <input type="hidden" name="dept_id">
+                </form>
+            </div>
+			<div class="modal-footer justify-content-center">
+                <button type="submit" form="form-delete-user" class="btn btn-danger" id="submit">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+		</div>
+	</div>
+</div>
+
+<!-- modal -->
+
+<!-- javascript -->
+
+<script>
+    function confirmDelete(self) {
+        var id = self.getAttribute("data-id");
+    
+        document.getElementById("form-delete-user").dept_id.value = id;
+        $("#myModal").modal("show");
+
+    }
+</script>
 </html>

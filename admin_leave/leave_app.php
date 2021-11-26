@@ -6,6 +6,11 @@
     $sql = 'SELECT * FROM leave_tb ORDER BY leave_id';
     // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
 
+    if (isset($_POST['search'])) {
+        $search_term = $_POST['search_box'];
+        $sql = "SELECT * FROM leave_tb WHERE leave_id LIKE '%$search_term%' OR emp_id LIKE '%$search_term%'  OR leave_description LIKE '%$search_term%' ";
+    }
+
     //Run query and fetch result
     $result = mysqli_query($conn,$sql);
 ?>
@@ -56,19 +61,20 @@ $(document).ready(function(){
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
-                <?php
-                    if(mysqli_num_rows($result) > 0){
-                ?>
                     <div class="col-sm-3"><h2>Manage <b>Leave Applications</b></h2></div>
-                    <div class="col-sm-3">
-                        <form class="navbar-form form-inline">
-                            <div class="input-group search-box">								
-                                <input type="text" id="search" class="form-control" placeholder="Search for Leave">
-                                <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+                    <form action="leave_app.php" method="post" class="col-sm-4">
+                        <div class="input-group">
+                            <div class="form-outline">
+                                <input type="search" id="search" class="form-control" placeholder="Search" name="search_box"/>
                             </div>
-                        </form>
-                    </div>
-                    <div class="col-sm-6">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary" name="search" style="height:38px;">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div> 
+                        </div>
+                    </form>
+                    <div class="col-sm-5">
                         <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-info active">
                                 <input type="radio" name="status" value="all" checked="checked"> All
@@ -87,6 +93,9 @@ $(document).ready(function(){
                 </div>
             </div>
             <table class="table table-striped table-hover">
+            <?php
+                        if(mysqli_num_rows($result) > 0){
+                    ?>
                 <thead>
                     <tr>
                         <th scope="col">Leave ID</th>
@@ -121,7 +130,7 @@ $(document).ready(function(){
                             <td><?php echo htmlspecialchars($row['start_date'])?></td>
                             <td><?php echo htmlspecialchars($row['end_date'])?></td>
                             <?php
-                            echo "<td>".$interval->days."</td>";
+                            echo "<td>$interval->days days</td>" ;
                             ?>
                             <td><?php if (($row['status']) == 'Pending') { ?>
                                 <span class="label label-warning"><?php echo htmlspecialchars($row['status'])?></span>
@@ -141,8 +150,9 @@ $(document).ready(function(){
             </table>
         </div> 
     </div>
-    <?php } else { 
-        echo '<div class="alert alert-danger" style="margin-left:auto; margin-right:auto; width:100%; text-align: center"><em>No records were found.</em></div>';
+    <?php } else {
+        
+        echo '<br><div class="alert alert-danger" style="margin-left:auto; margin-right:auto; width:100%; text-align: center"><em>No records were found.</em></div>';
     } ?>
     <!-- Table --> 
 </div>

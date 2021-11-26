@@ -9,6 +9,6 @@ $branch_id = $_GET['branch_id'];
 $result = mysqli_query($conn, "DELETE FROM branch WHERE branch_id='$branch_id'");
 
 //redirecting to the display page (index.php in our case)
-header("Location:branch.php");
+header("Location:confirmation_branch.php");
 ?>
 

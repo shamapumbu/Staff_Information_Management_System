@@ -5,9 +5,17 @@
 
     include('add_job.php');
 
+    $errors['no_records'] = '<div class="alert alert-danger" role="alert" style="text-align: center">No records found</div>';
+
     //Create query
     $sql = 'SELECT * FROM job ORDER BY job_id';
     // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
+
+    if (isset($_POST['search'])) {
+        $search_term = $_POST['search_box'];
+        $sql = "SELECT * FROM job WHERE job_id LIKE '%$search_term%' OR job_description LIKE '%$search_term%'  OR salary LIKE '%$search_term%'";
+    }
+
 
     //Run query and fetch result
     $result = mysqli_query($conn,$sql);
@@ -25,6 +33,8 @@
 
 
 <!DOCTYPE html>
+<link rel="stylesheet" href="../stylesheets/styles-del_confirm.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
     .content {
@@ -43,17 +53,21 @@
     <!-- Displaying Data in table format -->
     <div class="container content">
     <div class="row" style="padding-top: 20px;">
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <h4 id="page-title">Manage <b>Jobs</b></h4>
             </div>
-            <div class="col-sm-3">
-                <form class="navbar-form form-inline">
-                    <div class="input-group search-box">								
-                        <input type="text" id="search" class="form-control" placeholder="Search for Job">
-                        <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+            <form action="job.php" method="post" class="col-sm-4">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input type="search" id="search" class="form-control" placeholder="Search" name="search_box"/>
                     </div>
-                </form>
-            </div>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary" name="search">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div> 
+                </div>
+            </form>
             <div class="col-sm-3" style="text-align: right;">
                 <button data-toggle="modal" data-target="#exampleModal" class="btn btn-success" type="submit">Add Job <i class="fas fa-user-plus"></i></button>
             </div>
@@ -79,13 +93,15 @@
                     <tr>
                         <th scope="row"><?php echo htmlspecialchars($job['job_id'])?></th>
                         <td><?php echo htmlspecialchars($job['job_description'])?></td>
-                        <td><?php echo htmlspecialchars($job['salary'])?></td>
+                        <td><?php echo 'K'. htmlspecialchars($job['salary'])?></td>
                         <td>
                         <?php 
-                            echo '<a href="view_job.php?job_id='.$job['job_id'].'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                            echo '<a href="update.php?job_id='. $job['job_id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                            echo '<a href="delete_job.php?job_id='. $job['job_id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash delete-btn" style="color:red;"></span></a>';
+                            echo '<a href="view_job.php?job_id='.$job['job_id'].'" class="btn btn-primary" title="View Record" data-toggle="tooltip"><span class="fa fa-eye" style="color:white;"></span></a>';
                         ?>
+                        <?php
+                            echo '<a href="update.php?job_id='. $job['job_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
+                        ?>
+                            <a class=" btn btn-danger" data-id="<?php echo $job['job_id']?>" onclick="confirmDelete(this);"><span class="fa fa-trash delete-btn" style="color:white;"></span></a>
                         </td>
                     </tr>
                      <?php endforeach; ?>
@@ -140,5 +156,45 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Deletion Modal HTML -->
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box">
+                    <i class="fas fa-exclamation"></i>
+				</div>						
+				<h4 class="modal-title w-100">Are you sure?</h4>	
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+                <h6>Do you really want to delete this record? This action cannot be undone.</h6>
+                <form method="GET" action="delete_job.php" id="form-delete-user">
+                    <input type="hidden" name="job_id">
+                </form>
+            </div>
+			<div class="modal-footer justify-content-center">
+                <button type="submit" form="form-delete-user" class="btn btn-danger" id="submit">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+		</div>
+	</div>
+</div>
+
+<!-- modal -->
+
+<!-- javascript -->
+
+<script>
+    function confirmDelete(self) {
+        var id = self.getAttribute("data-id");
+    
+        document.getElementById("form-delete-user").job_id.value = id;
+        $("#myModal").modal("show");
+
+    }
+</script>
     
 </html>
