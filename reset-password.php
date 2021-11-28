@@ -72,7 +72,7 @@
         <h2>Reset Password</h2>
         <p>Please fill out this form to reset your password.</p>
         <div class="alert alert-info" role="alert">
-            Note that you will automatically be logged out upon successfull change of password!
+            Note that you will automatically be logged out upon successful change of password!
         </div>
         <?php echo $messages['notification']?>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

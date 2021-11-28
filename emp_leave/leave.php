@@ -14,8 +14,6 @@
 		$start = $_POST['start'];
 		//echo "$reason";
 		$end = $_POST['end'];
-
-		print_r($_SESSION['emp_id']);
 	
 		$sql = "INSERT INTO leave_tb(leave_id,emp_id,leave_description,start_date,end_date,status) VALUES ('','$id','$reason','$start','$end','Pending')";
 	
@@ -34,7 +32,6 @@
 body {
 	color: #fff;
 	background: #EEE;
-	font-family: 'Roboto', sans-serif;
 }
 .form-control {
 	height: 40px;

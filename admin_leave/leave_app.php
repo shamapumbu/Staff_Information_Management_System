@@ -3,6 +3,8 @@
 
     include('../components/admin_nav.php');
 
+    // include('../admin_leave/approve.php');
+
     $sql = 'SELECT * FROM leave_tb ORDER BY leave_id';
     // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
 
@@ -20,6 +22,8 @@
 <head>
 <title>row Leaves</title>
 <link rel="stylesheet" href="../stylesheets/styles-table.css">
+<link rel="stylesheet" href="../stylesheets/styles-del_confirm.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 body {
     color: #566787;
@@ -140,11 +144,18 @@ $(document).ready(function(){
                                 <span class="label label-danger"><?php echo htmlspecialchars($row['status'])?></span>
                             <?php } ?>
                             </td>
+                            <td class="row">
+                                <?php if (($row['status']) == 'Pending') {?>
+                                <a class="btn btn-success" data-id="<?php echo "$row[leave_id]"?>" onclick="confirmApprove(this);" style="margin-right: 5px;"><span class="fas fa-check" style="color:white;"></span></a>
+                                <a class="btn btn-danger" data-id="<?php echo "$row[leave_id]"?>" onclick="confirmDeny(this);"><span class="fas fa-times" style="color:white;"></span></a>
+                                <?php } ?>
+                            </td>
                             <?php
-                                echo "<td><a href=\"approve.php?emp_id=$row[emp_id]&leave_id=$row[leave_id]\" onClick=\"return confirm('Are you sure you want to Approve the request?')\">Approve</a> <a href=\"deny.php?emp_id=$row[emp_id]&leave_id=$row[leave_id]\" onClick=\"return confirm('Are you sure you want to Deny the request?')\">Deny</a></td>";
+                                // echo "<td><a href=\"approve.php?emp_id=$row[emp_id]&leave_id=$row[leave_id]\" onClick=\"return confirm('Are you sure you want to Approve the request?')\">Approve</a> <a href=\"deny.php?emp_id=$row[emp_id]&leave_id=$row[leave_id]\" onClick=\"return confirm('Are you sure you want to Deny the request?')\">Deny</a></td>";
                                 echo "</tr>";
                             }
                             ?>
+                            
                             </tr> 
                 </tbody>
             </table>
@@ -156,5 +167,71 @@ $(document).ready(function(){
     } ?>
     <!-- Table --> 
 </div>
+
+<!-- Approve Leave Modal HTML -->
+<div id="approveModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box" style="color: #FFC107; border-color:#FFC107;">
+                    <i class="fas fa-exclamation" style="color: #FFC107;"></i>
+				</div>						
+				<h4 class="modal-title w-100">Are you sure?</h4>	
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+                <h6>Do you really want to deny this application? This action cannot be undone.</h6>
+                <form method="GET" action="approve.php" id="form-delete-user">
+                    <input type="hidden" name="leave_id">
+                </form>
+            </div>
+			<div class="modal-footer justify-content-center">
+                <button type="submit" form="form-delete-user" class="btn btn-success" id="submit" style="background-color: #28A745;">Approve</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+		</div>
+	</div>
+</div>
+
+<!-- modal -->
+
+<!-- javascript -->
+
+<script src="approve.js"></script>
+
+<!-- Deny Leave Modal HTML -->
+<div id="denyModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box" style="color: #FFC107; border-color:#FFC107;">
+                    <i class="fas fa-exclamation" style="color: #FFC107;"></i>
+				</div>						
+				<h4 class="modal-title w-100">Are you sure?</h4>	
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+                <h6>Do you really want to deny this application? This action cannot be undone.</h6>
+                <form method="GET" action="deny.php" id="form-deny-user">
+                    <input type="hidden" name="leave_id">
+                </form>
+            </div>
+			<div class="modal-footer justify-content-center">
+                <button type="submit" form="form-deny-user" class="btn btn-danger" id="submit">Deny</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+		</div>
+	</div>
+</div>
+
+<!-- modal -->
+
+<!-- javascript -->
+
+<script src="deny.js"></script>
+
+
+
+
 </body>
                        

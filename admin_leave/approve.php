@@ -11,11 +11,13 @@
         echo 'emp has data';
     }
     
-    $sql = "UPDATE leave_tb SET status='Approved' WHERE leave_id = '$leave_id' AND emp_id='$emp_id'";
+    $sql = "UPDATE leave_tb SET status='Approved' WHERE leave_id = '$leave_id'";
 
     //deleting the row from table
     $result = mysqli_query($conn, $sql);
 
     header("Location:leave_app.php");
+
+    
 ?>
 

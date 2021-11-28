@@ -12,11 +12,6 @@
     $result = mysqli_query($conn,$sql);
 ?>
 <style>
-body {
-    color: #566787;
-    background: #f5f5f5;
-    font-family: 'Roboto', sans-serif;
-}
 .table-responsive {
     margin: 30px 0;
 }
