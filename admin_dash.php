@@ -146,10 +146,10 @@
                   <td><?php echo htmlspecialchars($employee['dept_id'])?></td>
                   <td>
                         <?php 
-                            echo '<a href="view.php?emp_id='.$employee['emp_id'].'" class="btn btn-primary" title="View Record" data-toggle="tooltip"><span class="fa fa-eye" style="color:white;"></span></a>';
+                            echo '<a href="../sms/employee/view.php?emp_id='.$employee['emp_id'].'" class="btn btn-primary" title="View Record" data-toggle="tooltip"><span class="fa fa-eye" style="color:white;"></span></a>';
                         ?>
                         <?php
-                            echo '<a href="update.php?emp_id='. $employee['emp_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
+                            echo '<a href="../sms/employee/update.php?emp_id='. $employee['emp_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
                         ?>
                         <?php if ($employee['emp_id'] != $adminID) { ?>
                             <a class=" btn btn-danger" data-id="<?php echo $employee['emp_id']?>" onclick="confirmDelete(this);"><span class="fa fa-trash delete-btn" style="color:white;"></span></a>
