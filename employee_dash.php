@@ -18,17 +18,17 @@
 
     $pending_count = 0;
 
-    //Run query and fetch result
-    $result = mysqli_query($conn,$sql);
-    while ($row = mysqli_fetch_assoc($result)) {
-        if ($row['status'] == 'Pending') { 
-          $pending_count++;
-        }
-    }
+    $sql_emp = "SELECT emp_id,first_name,last_name,gender,salary FROM employee, job WHERE employee.job_id = job.job_id AND emp_id = $emp_id;";
+
+    $result_emp = mysqli_query($conn,$sql_emp);
+
+    //Store result in associative array
+    $employeeInfo = mysqli_fetch_all($result_emp,MYSQLI_ASSOC);
 
     $sqle = "SELECT * FROM employee WHERE emp_id='$emp_id'";
     $result = mysqli_query($conn,$sqle);
     $myEmployment = mysqli_fetch_all($result,MYSQLI_ASSOC);
+
 ?>
 
 <head>
@@ -56,7 +56,7 @@
           <div class="card">
               <h5 class="card-header">My Salary</h5>
               <div class="card-body">
-                <h5 class="card-title">$12345.00</h5>
+                <h5 class="card-title">K<?php echo $employeeInfo['0']['salary'];?></h5>
               </div>
             </div>
       </div>
