@@ -64,10 +64,10 @@
 ?>
 
 <head>
-  <link rel="stylesheet" href="stylesheets/styles-dash.css">
+<link rel="stylesheet" href="../sms/stylesheets/styles-del_confirm.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="stylesheets/styles-dash.css">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <div class="container">
@@ -164,15 +164,42 @@
         <?php endif; ?>
         <h4 class="col-6"><a href="employee/employee.php" class="btn btn-secondary btn-lg">All Employees</a></h4>
 </div>
-<script type="text/javascript">
-    $(function() {
-      Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-    });
-</script>
 
-<?php 
-    include('components/scripts.php');
-?>
+<!-- Deletion Modal HTML -->
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">
+				<div class="icon-box">
+                    <i class="fas fa-exclamation"></i>
+				</div>						
+				<h4 class="modal-title w-100">Are you sure?</h4>	
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+                <h6>Do you really want to delete this record? This action cannot be undone.</h6>
+                <form method="GET" action="employee/delete.php" id="form-delete-user">
+                    <input type="hidden" name="emp_id">
+                </form>
+            </div>
+			<div class="modal-footer justify-content-center">
+                <button type="submit" form="form-delete-user" class="btn btn-danger" id="submit">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+		</div>
+	</div>
+</div>
+
+<!-- modal -->
+
+<!-- javascript -->
+
+<script>
+    function confirmDelete(self) {
+        var id = self.getAttribute("data-id");
+    
+        document.getElementById("form-delete-user").emp_id.value = id;
+        $("#myModal").modal("show");
+
+    }
+</script>
