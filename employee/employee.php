@@ -137,8 +137,22 @@
                         <th scope="row"><?php echo htmlspecialchars($employee['emp_id'])?></th>
                         <td><?php echo htmlspecialchars($employee['first_name'])?></td>
                         <td><?php echo htmlspecialchars($employee['last_name'])?></td>
-                        <td><?php echo htmlspecialchars($employee['job_id'])?></td>
-                        <td><?php echo htmlspecialchars($employee['dept_id'])?></td>
+                        <td><?php 
+                        if(empty($employee['job_id'])) {
+                            echo 'NOT ASSIGNED';
+                        } else {
+                            echo htmlspecialchars($employee['job_id']);
+                        }
+                        ?>
+                        </td>
+                        <td><?php
+                        if (empty($employee['dept_id'])) {
+                            echo 'NOT ASSIGNED';
+                        } else {
+                            echo htmlspecialchars($employee['dept_id']);
+                        }
+                        ?>
+                        </td>
                         <td>
                         <?php 
                             echo '<a href="view.php?emp_id='.$employee['emp_id'].'" class="btn btn-primary" title="View Record" data-toggle="tooltip"><span class="fa fa-eye" style="color:white;"></span></a>';

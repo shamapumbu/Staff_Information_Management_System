@@ -16,11 +16,19 @@
     $sql = "SELECT * FROM leave_tb WHERE emp_id='$emp_id'";
     // $sql = 'SELECT leave_id, leave_description FROM leave_tb ORDER BY leave_id';
 
-    $pending_count = 0;
-
     $sql_emp = "SELECT emp_id,first_name,last_name,gender,salary FROM employee, job WHERE employee.job_id = job.job_id AND emp_id = $emp_id;";
 
     $result_emp = mysqli_query($conn,$sql_emp);
+
+    $pending_count = 0;
+
+    //Run query and fetch result
+    $result = mysqli_query($conn,$sql);
+    while ($row = mysqli_fetch_assoc($result)) {
+        if ($row['status'] == 'Pending') { 
+          $pending_count++;
+        }
+    }
 
     //Store result in associative array
     $employeeInfo = mysqli_fetch_all($result_emp,MYSQLI_ASSOC);
