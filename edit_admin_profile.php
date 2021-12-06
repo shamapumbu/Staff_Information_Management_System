@@ -1,8 +1,8 @@
 <?php
 
-    include('../config/db_connection.php');
+    include('../sms/config/db_connection.php');
 
-    include('../components/admin_nav.php');
+    include('../sms/components/admin_nav.php');
 
     $message['update'] = '';
 
@@ -47,9 +47,7 @@
     //Store result in associative array
     $projects = mysqli_fetch_all($result,MYSQLI_ASSOC);
 
-
-    if (isset($_GET['emp_id'])) {
-        $emp_id = $_GET['emp_id'];
+        $emp_id = $_SESSION['emp_id'];
         $_SESSION['$emp_old'] = $emp_id;
 
         $sql_d = "SELECT * FROM employee WHERE emp_id='$emp_id'";
@@ -85,7 +83,6 @@
         $project_no = $employee['0']['project_no'];
 
         $bonus = $employee['0']['bonus'];
-    }
 
     if(isset($_POST['update'])) {
         $emp_id_old = $_SESSION['$emp_old'];
@@ -130,7 +127,7 @@
                 <?php echo $message['update']?>
             </div>
             <h1 class="mt-5 mb-3" style="padding-top: 5px;">Edit Record</h1>
-            <form action="edit.php" method="post">
+            <form action="edit_admin_profile.php" method="post">
                 <div class="row">
                     <div class="form-group col-6">
                         <label>Employee ID</label>

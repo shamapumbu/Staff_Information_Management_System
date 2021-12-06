@@ -160,13 +160,13 @@ body {
 	<!-- Collection of nav links, forms, and other content for toggling -->
 	<div id="navbarCollapse" class="collapse navbar-collapse justify-content-start" style="padding-right: 75px;">
 		<div class="navbar-nav">
-			<a href="/../testing/admin_dash.php" class="nav-item nav-link">Dashboard</a>
-			<a href="/../testing/employee/employee.php" class="nav-item nav-link">Employees</a>
-			<a href="/../testing/department/dept.php" class="nav-item nav-link">Departments</a>
-			<a href="/../testing/project/project.php" class="nav-item nav-link">Projects</a>
-			<a href="/../testing/job/job.php" class="nav-item nav-link">Job</a>
-			<a href="/../testing/branch/branch.php" class="nav-item nav-link">Branches</a>
-			<a href="/../testing/admin_leave/leave_app.php" class="nav-item nav-link">Leave</a>
+			<a href="/../sms/admin_dash.php" class="nav-item nav-link">Dashboard</a>
+			<a href="/../sms/employee/employee.php" class="nav-item nav-link">Employees</a>
+			<a href="/../sms/department/dept.php" class="nav-item nav-link">Departments</a>
+			<a href="/../sms/project/project.php" class="nav-item nav-link">Projects</a>
+			<a href="/../sms/job/job.php" class="nav-item nav-link">Job</a>
+			<a href="/../sms/branch/branch.php" class="nav-item nav-link">Branches</a>
+			<a href="/../sms/admin_leave/leave_app.php" class="nav-item nav-link">Leave</a>
 		</div>
 		<div class="navbar-nav ml-auto">
 			<div class="nav-item dropdown">

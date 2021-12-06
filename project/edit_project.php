@@ -41,11 +41,11 @@
         $sql_duplicate = "SELECT * FROM project WHERE project_no='$project_no'";
         $duplicate = mysqli_query($conn,$sql_duplicate);
 
-        if (mysqli_num_rows($duplicate) > 0) {
+        if (mysqli_num_rows($duplicate) > 0 && ($project_no_old != $project_no)) {
         //updating value with that specific id will result in duplicates hence do not run query but print error message
             $message['update'] = '<div class="alert alert-danger" role="alert" style="text-align: center">Record Not Updated! Please ensure that the ID value does not already exist in the database</div>';
         } else {
-            $sql_query = "UPDATE project SET project_no='$project_no', project_name='$project_name', project_budget='$project_budget', date_comissioned='$date_comissioned', expected_completion_date='$expected_completion_date' WHERE project_no='$project_no_old'";
+            $sql_query = "UPDATE project SET project_name='$project_name', project_budget='$project_budget', date_comissioned='$date_comissioned', expected_completion_date='$expected_completion_date' WHERE project_no='$project_no_old'";
             $result = mysqli_query($conn,$sql_query);
             $message['update'] = '<div class="alert alert-success" role="alert" style="text-align: center">Record Successfully Updated</div>';
         }
@@ -74,7 +74,7 @@
                 <div class="row">
                 <div class="form-group col-6">
                         <label>Project Number</label>
-                        <input type="text" class="form-control" value="<?php echo $project_no?>" name="project_no"> 
+                        <input type="text" class="form-control" value="<?php echo $project_no?>" name="project_no" readonly> 
                     </div>
                     <div class="form-group col-6">
                         <label>Project Name</label>
@@ -86,11 +86,11 @@
                     </div>
                     <div class="form-group col-6">
                         <label>Date Commissioned</label>
-                        <input type="text" class="form-control" value="<?php echo  $date_comissioned?>" name="date_comissioned">
+                        <input type="date" class="form-control" value="<?php echo  $date_comissioned?>" name="date_comissioned">
                     </div> 
                     <div class="form-group col-6">
                         <label>Expected Completion Date</label>
-                        <input type="text" class="form-control" value="<?php echo $expected_completion_date?>" name="expected_completion_date"> 
+                        <input type="date" class="form-control" value="<?php echo $expected_completion_date?>" name="expected_completion_date"> 
                     </div>
                 </div>
                 

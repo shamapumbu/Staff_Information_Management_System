@@ -41,11 +41,11 @@
         $sql_duplicate = "SELECT * FROM branch WHERE branch_id='$branch_id'";
         $duplicate = mysqli_query($conn,$sql_duplicate);
 
-        if (mysqli_num_rows($duplicate) > 0) {
+        if (mysqli_num_rows($duplicate) > 0 && ($branch_id_old != $branch_id)) {
         //updating value with that specific id will result in duplicates hence do not run query but print error message
             $message['update'] = '<div class="alert alert-danger" role="alert" style="text-align: center">Record Not Updated! Please ensure that the ID value does not already exist in the database</div>';
         } else {
-            $sql_query = "UPDATE branch SET branch_id='$branch_id', street_address='$street_address', postal_code='$postal_code', city='$city' WHERE branch_id='$branch_id_old'";
+            $sql_query = "UPDATE branch SET street_address='$street_address', postal_code='$postal_code', city='$city' WHERE branch_id='$branch_id_old'";
             $result = mysqli_query($conn,$sql_query);
             $message['update'] = '<div class="alert alert-success" role="alert" style="text-align: center">Record Successfully Updated</div>';
         }
@@ -74,7 +74,7 @@
                 <div class="row">
                 <div class="form-group col-6">
                         <label>Branch ID</label>
-                        <input type="text" class="form-control" value="<?php echo $branch_id?>" name="branch_id"> 
+                        <input type="text" class="form-control" value="<?php echo $branch_id?>" name="branch_id" readonly> 
                     </div>
                     <div class="form-group col-6">
                         <label>Street Address</label>

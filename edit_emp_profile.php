@@ -1,8 +1,8 @@
 <?php
 
-    include('../config/db_connection.php');
+    include('../sms/config/db_connection.php');
 
-    include('../components/admin_nav.php');
+    include('../sms/components/navigation.php');
 
     $message['update'] = '';
 
@@ -47,9 +47,7 @@
     //Store result in associative array
     $projects = mysqli_fetch_all($result,MYSQLI_ASSOC);
 
-
-    if (isset($_GET['emp_id'])) {
-        $emp_id = $_GET['emp_id'];
+        $emp_id = $_SESSION['emp_id'];
         $_SESSION['$emp_old'] = $emp_id;
 
         $sql_d = "SELECT * FROM employee WHERE emp_id='$emp_id'";
@@ -85,28 +83,20 @@
         $project_no = $employee['0']['project_no'];
 
         $bonus = $employee['0']['bonus'];
-    }
 
     if(isset($_POST['update'])) {
         $emp_id_old = $_SESSION['$emp_old'];
         // echo $dept_id_old;
 
-        $emp_id = mysqli_real_escape_string($conn, $_POST['emp_id']);
         $first_name = mysqli_real_escape_string($conn, $_POST['first_name']);
         $last_name = mysqli_real_escape_string($conn, $_POST['last_name']);
         $date_of_birth = mysqli_real_escape_string($conn, $_POST['date_of_birth']);
         $phone = mysqli_real_escape_string($conn, $_POST['phone']);
         $home_address = mysqli_real_escape_string($conn, $_POST['home_address']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $join_date = mysqli_real_escape_string($conn, $_POST['join_date']);
         $gender = mysqli_real_escape_string($conn, $_POST['gender']);
-        $job_id = mysqli_real_escape_string($conn, $_POST['job_id']);
-        $branch_id = mysqli_real_escape_string($conn, $_POST['branch_id']);
-        $dept_id = mysqli_real_escape_string($conn, $_POST['dept_id']);
-        $project_no = mysqli_real_escape_string($conn, $_POST['project_no']);
-        $bonus = mysqli_real_escape_string($conn, $_POST['bonus']);
         
-        $sql_query = "UPDATE employee SET first_name='$first_name', last_name='$last_name', date_of_birth='$date_of_birth', phone='$phone', home_address='$home_address', email='$email', join_date='$join_date', gender='$gender', job_id='$job_id', branch_id='$branch_id', dept_id='$dept_id', project_no='$project_no', bonus='$bonus' WHERE emp_id='$emp_id_old'";
+        $sql_query = "UPDATE employee SET first_name='$first_name', last_name='$last_name', date_of_birth='$date_of_birth', phone='$phone', home_address='$home_address', email='$email', gender='$gender' WHERE emp_id='$emp_id_old'";
             $result = mysqli_query($conn,$sql_query);
             $message['update'] = '<div class="alert alert-success" role="alert" style="text-align: center">Record Successfully Updated</div>';
     }
@@ -129,8 +119,8 @@
             <div style="margin-top:10px;">
                 <?php echo $message['update']?>
             </div>
-            <h1 class="mt-5 mb-3" style="padding-top: 5px;">Edit Record</h1>
-            <form action="edit.php" method="post">
+            <h1 class="mt-5 mb-3" style="padding-top: 5px;">Edit My Profile</h1>
+            <form action="edit_emp_profile.php" method="post">
                 <div class="row">
                     <div class="form-group col-6">
                         <label>Employee ID</label>
@@ -162,7 +152,7 @@
                     </div>
                     <div class="form-group col-6">
                         <label>Join Date</label>
-                        <input type="date" class="form-control" value="<?php echo $join_date?>" name="join_date">
+                        <input type="date" class="form-control" value="<?php echo $join_date?>" name="join_date" readonly>
                         </div> 
                     <div class="form-group col-6">
                         <label>Gender</label>
@@ -175,43 +165,23 @@
                     </div>
                     <div class="form-group col-6">
                         <label>Job ID</label>
-                        <select class="form-control" name="job_id">
-                        <option selected value="<?php echo htmlspecialchars($job_id);?>">Choose Job ID...</option>
-                        <?php foreach ($jobs as $job) : ?>
-                            <option><?php echo htmlspecialchars($job['job_id'])?></option>
-                        <?php endforeach; ?>
-                    </select>
+                        <input class="form-control" value="<?php echo $job_id?>" name="job_id" readonly></input>
                     </div>
                     <div class="form-group col-6">
                         <label>Branch ID</label>
-                        <select class="form-control" name="branch_id">
-                        <option selected value="<?php echo htmlspecialchars($branch_id);?>">Choose Branch ID...</option>
-                        <?php foreach ($branches as $branch) : ?>
-                            <option><?php echo htmlspecialchars($branch['branch_id'])?></option>
-                        <?php endforeach; ?>
-                        </select>
+                        <input class="form-control" value="<?php echo $branch_id?>" name="branch_id" readonly></input>
                     </div> 
                     <div class="form-group col-6">
                         <label>Department ID</label>
-                        <select class="form-control" name="dept_id">
-                        <option selected value="<?php echo htmlspecialchars($dept_id);?>">Choose Department ID...</option>
-                        <?php foreach ($departments as $department) : ?>
-                            <option><?php echo htmlspecialchars($department['dept_id'])?></option>
-                        <?php endforeach; ?>
-                        </select>
+                        <input class="form-control" value="<?php echo $dept_id?>" name="dept_id" readonly></input>
                     </div>
                     <div class="form-group col-6">
                         <label>Project Number</label>
-                        <select class="form-control" name="project_no">
-                        <option selected value="<?php echo htmlspecialchars($project_no);?>">Choose Project ID...</option>
-                        <?php foreach ($projects as $project) : ?>
-                            <option><?php echo htmlspecialchars($project['project_no'])?></option>
-                        <?php endforeach; ?>
-                        </select>
+                        <input class="form-control" value="<?php echo $project_no?>" name="project_no" readonly></input>
                     </div> 
                     <div class="form-group col-6">
                         <label>Bonus</label>
-                        <input type="text" class="form-control" value="<?php echo $bonus?>" name="bonus"> 
+                        <input type="text" class="form-control" value="<?php echo $bonus?>" name="bonus" readonly> 
                     </div>
                 </div>
 

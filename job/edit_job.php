@@ -37,7 +37,7 @@
         $sql_duplicate = "SELECT * FROM job WHERE job_id='$job_id'";
         $duplicate = mysqli_query($conn,$sql_duplicate);
 
-        if (mysqli_num_rows($duplicate) > 0) {
+        if (mysqli_num_rows($duplicate) > 0 && ($job_id_old != $job_id)) {
         //updating value with that specific id will result in duplicates hence do not run query but print error message
             $message['update'] = '<div class="alert alert-danger" role="alert" style="text-align: center">Record Not Updated! Please ensure that the ID value does not already exist in the database</div>';
         } else {

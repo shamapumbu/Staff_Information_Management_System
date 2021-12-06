@@ -161,8 +161,11 @@
                             echo '<a href="edit.php?emp_id='. $employee['emp_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
                         ?>  
                         <?php if ($employee['emp_id'] != $emp_id) { ?>
-                            <a class=" btn btn-danger" data-id="<?php echo $employee['emp_id']?>" onclick="confirmDelete(this);"><span class="fa fa-trash delete-btn" style="color:white;"></span></a>
+                            <a class=" btn btn-danger" data-id="<?php echo $employee['emp_id']?>" onclick="confirmDelete(this);" title="Delete Record"><span class="fa fa-trash delete-btn" style="color:white;"></span></a>
                         <?php } ?>
+                        <?php
+                            echo '<a href="reset.php?emp_id='. $employee['emp_id'] .'" class="btn btn-info" title="Reset Password" data-toggle="tooltip"><span class="fa fa-key" style="color:white;"></span></a>';
+                        ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
