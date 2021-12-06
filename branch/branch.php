@@ -100,7 +100,7 @@
                             echo '<a href="view_branch.php?branch_id='.$branch['branch_id'].'" class="btn btn-primary" title="View Record" data-toggle="tooltip"><span class="fa fa-eye" style="color:white;"></span></a>';
                         ?>
                         <?php
-                            echo '<a href="update.php?branch_id='. $branch['branch_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
+                            echo '<a href="edit_branch.php?branch_id='. $branch['branch_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
                         ?>
                             <a class=" btn btn-danger" data-id="<?php echo $branch['branch_id']?>" onclick="confirmDelete(this);"><span class="fa fa-trash delete-btn" style="color:white;"></span></a>
                         </td>

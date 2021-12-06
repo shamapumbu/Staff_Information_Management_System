@@ -43,7 +43,7 @@
             </div>
                     
             <div class="row">
-                <h4 class="col-6"><a href="edit.php" class="btn btn-success btn-lg">Edit</a></h4>
+                <h4 class="col-6"><?php echo '<a href="edit_dept.php?dept_id='. $department['0']['dept_id'] .'" class="btn btn-success btn-lg">Edit</a>'?></h4>
                 <h4 class="col-6"><a href="javascript:history.back()" class="btn btn-secondary btn-lg">Back</a></h4>
             </div>
         </div>

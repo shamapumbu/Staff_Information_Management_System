@@ -96,7 +96,7 @@
                             echo '<a href="view_dept.php?dept_id='.$department['dept_id'].'" class="btn btn-primary" title="View Record" data-toggle="tooltip"><span class="fa fa-eye" style="color:white; text-align:center;"></span></a>';
                         ?>
                         <?php
-                            echo '<a href="update.php?dept_id='. $department['dept_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
+                            echo '<a href="edit_dept.php?dept_id='. $department['dept_id'] .'" class="btn btn-warning" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil" style="color:white;"></span></a>';
                         ?>
                             <a class=" btn btn-danger" data-id="<?php echo $department['dept_id']?>" onclick="confirmDelete(this);"><span class="fa fa-trash delete-btn" style="color:white;"></span></a>
                         </td>
